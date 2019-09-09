@@ -1,5 +1,6 @@
 <?php
 
+use app\components\MyWidget;
 use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\widgets\Pjax;
@@ -13,6 +14,8 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="country-index">
 
     <h1 class="text-center"><?= Html::encode($this->title) ?></h1>
+    <?= MyWidget::widget(['message' => ' Yii2']) ?>
+
 
     <?= $this->render('_form', [
         'model' => $model,
