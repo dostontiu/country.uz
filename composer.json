@@ -21,7 +21,8 @@
         "creocoder/yii2-nested-sets": "^0.9.0",
         "kartik-v/yii2-widget-select2": "*",
         "2amigos/yii2-ckeditor-widget" : "~2.1",
-        "yii2mod/yii2-star-rating": "*"
+        "yii2mod/yii2-star-rating": "*",
+        "dmstr/yii2-adminlte-asset": "2.*"
 
     },
     "require-dev": {
