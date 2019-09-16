@@ -12,7 +12,7 @@
         "irc": "irc://irc.freenode.net/yii",
         "source": "https://github.com/yiisoft/yii2"
     },
-    "minimum-stability": "stable",
+    "minimum-stability": "dev",
     "require": {
         "php": ">=5.4.0",
         "yiisoft/yii2": "~2.0.14",
@@ -23,7 +23,9 @@
         "2amigos/yii2-ckeditor-widget" : "~2.1",
         "yii2mod/yii2-star-rating": "*",
         "dmstr/yii2-adminlte-asset": "2.*",
-        "kartik-v/yii2-widget-fileinput": "*"
+        "kartik-v/yii2-widget-fileinput": "*",
+        "mirocow/yii2-yandex-maps" : "*",
+        "msvdev/yii2-widget-mappicker": "*"
 
     },
     "require-dev": {

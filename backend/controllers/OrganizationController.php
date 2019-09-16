@@ -106,9 +106,11 @@ class OrganizationController extends Controller
             $model->photo = Yii::$app->security->generateRandomString(12).'.'.$image->extension;
             Yii::$app->params['uploadPath'] = Yii::$app->basePath . '/web/uploads/';
             $path = Yii::$app->params['uploadPath'] . $model->photo;
-            $model->save();
-            $model->saveCatalogs();
-            return $this->redirect(['index']);
+            if ($model->validate() && $model->save()){
+                $image->saveAs($path);
+                $model->saveCatalogs();
+                return $this->redirect(['index']);
+            }
         }
 
         return $this->render('update', [

@@ -3,6 +3,7 @@
 use common\models\Region;
 use dosamigos\ckeditor\CKEditor;
 use kartik\file\FileInput;
+use msvdev\widgets\mappicker\MapInput;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
@@ -21,6 +22,20 @@ use yii2mod\rating\StarRating;
         'options'=>['enctype'=>'multipart/form-data'],
     ]); ?>
 
+    <?= $form->field($model, 'gps')->widget(
+        MapInput::className(),
+        [
+            'language' => 'en-Us', // map language, default is the same as in the app
+            'service' => 'yandex', // map service provider, "google" or "yandex", default "google"
+//                    'apiKey' => '', // required google maps
+//                    'coordinatesDelimiter' => '@', // attribute coordinate string delimiter, default "@" (lat@lng)
+            'mapWidth' => '1600px', // width map container, default "500px"
+            'mapHeight' => '500px', // height map container, default "500px"
+            'mapZoom' => '16', // map zoom value, default "10"
+            'mapCenter' => [55.753338, 37.622861], // coordinates center map with an empty attribute, default Moscow
+        ]
+    );
+    ?>
     <div class="row">
         <div class="col-md-8">
             <?= $form->field($model, 'name_uz')->textInput(['maxlength' => true]) ?>
@@ -65,8 +80,6 @@ use yii2mod\rating\StarRating;
                     'showUpload' => false,
                 ],
             ]); ?>
-
-            <?= $form->field($model, 'gps')->textInput(['maxlength' => true]) ?>
 
             <div class="form-group">
                 <?= Html::submitButton(Yii::t('app', 'Save'), ['class' => 'btn btn-success']) ?>

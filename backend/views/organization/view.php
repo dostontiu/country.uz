@@ -1,6 +1,8 @@
 <?php
 
+use msvdev\widgets\mappicker\MapInput;
 use yii\helpers\Html;
+use yii\widgets\ActiveForm;
 use yii\widgets\DetailView;
 use yii2mod\rating\StarRating;
 
@@ -20,9 +22,27 @@ function rate($id){
         ],
     ]);
 }
+
+
+
 ?>
 <div class="organization-view">
+    <?php $form = ActiveForm::begin();
+    echo $form->field($model, 'gps')->widget(
+        MapInput::className(),
+        [
+            'language' => 'en-Us', // map language, default is the same as in the app
+            'service' => 'yandex', // map service provider, "google" or "yandex", default "google"
+            'mapWidth' => '1600px', // width map container, default "500px"
+            'mapHeight' => '500px', // height map container, default "500px"
+            'mapZoom' => '17', // map zoom value, default "10"
+            'mapCenter' => [55.753338, 37.622861], // coordinates center map with an empty attribute, default Moscow
+        ]
+    );
+    ActiveForm::end();
+    ?>
     <div class="container">
+
             <?= DetailView::widget([
                 'model' => $model,
                 'attributes' => [
