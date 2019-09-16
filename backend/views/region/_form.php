@@ -11,7 +11,7 @@ use yii\widgets\ActiveForm;
 <div class="region-form">
 
     <?php $form = ActiveForm::begin(); ?>
-    <div class="row">
+    <div class="container">
         <div class="col-md-3">
             <?= $form->field($model, 'name_uz')->textInput(['maxlength' => true]) ?>
         </div>
@@ -27,8 +27,6 @@ use yii\widgets\ActiveForm;
             </div>
         </div>
     </div>
-
-
     <?php ActiveForm::end(); ?>
 
 </div>

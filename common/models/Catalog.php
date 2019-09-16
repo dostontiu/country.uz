@@ -64,7 +64,7 @@ class Catalog extends \yii\db\ActiveRecord
      */
     public function getParent()
     {
-        return $this->hasOne(Catalog::className(), ['id' => 'parent_id']);
+        return $this->hasOne(Catalog::className(), ['id' => 'parent_id'])->from(Catalog::tableName() . ' parent_page');
     }
 
     /**
@@ -72,7 +72,7 @@ class Catalog extends \yii\db\ActiveRecord
      */
     public function getCatalogs()
     {
-        return $this->hasMany(Catalog::className(), ['parent_id' => 'id']);
+        return $this->hasMany(Catalog::className(), ['parent_id' => 'id'])->from(Catalog::tableName() . ' sub_page');
     }
 
     /**

@@ -22,7 +22,8 @@
         "kartik-v/yii2-widget-select2": "*",
         "2amigos/yii2-ckeditor-widget" : "~2.1",
         "yii2mod/yii2-star-rating": "*",
-        "dmstr/yii2-adminlte-asset": "2.*"
+        "dmstr/yii2-adminlte-asset": "2.*",
+        "kartik-v/yii2-widget-fileinput": "*"
 
     },
     "require-dev": {

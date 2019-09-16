@@ -2,6 +2,7 @@
 
 use common\models\Region;
 use dosamigos\ckeditor\CKEditor;
+use kartik\file\FileInput;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
@@ -17,6 +18,7 @@ use yii2mod\rating\StarRating;
     <?php $form = ActiveForm::begin([
         'id' => 'organization-form',
         'enableAjaxValidation' => false,
+        'options'=>['enctype'=>'multipart/form-data'],
     ]); ?>
 
     <div class="row">
@@ -51,16 +53,18 @@ use yii2mod\rating\StarRating;
             <?= $form->field($model, 'region_id')->dropDownList(ArrayHelper::map(Region::find()->all(), 'id', 'name_en'), ['prompt' => 'Chose region']) ?>
 
             <?= $form->field($model, 'rating')->widget(StarRating::className(), [
-                'options' => [
-                    // Your additional tag options
-                ],
                 'clientOptions' => [
-                    // Your client options
                     'hints' => ['bad', 'poor', 'regular', 'good', 'zooor'],
                 ],
             ]); ?>
 
-            <?= $form->field($model, 'photo')->textInput(['maxlength' => true]) ?>
+            <?= $form->field($model, 'image')->widget(FileInput::classname(), [
+                'options' => ['accept' => 'image/*'],
+                'pluginOptions'=>[
+                    'allowedFileExtensions'=>['jpg','gif','png'],
+                    'showUpload' => false,
+                ],
+            ]); ?>
 
             <?= $form->field($model, 'gps')->textInput(['maxlength' => true]) ?>
 

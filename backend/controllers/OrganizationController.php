@@ -10,6 +10,7 @@ use common\models\search\OrganizationQuery;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\web\UploadedFile;
 
 /**
  * OrganizationController implements the CRUD actions for Organization model.
@@ -64,16 +65,23 @@ class OrganizationController extends Controller
      * Creates a new Organization model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
+     * @throws \yii\base\Exception
      */
     public function actionCreate()
     {
         $model = new OrganizationWithCatalog();
-        $model->user_id = Yii::$app->user->id;
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            $model->saveCatalogs();
-            return $this->redirect(['index']);
+        if ($model->load(Yii::$app->request->post())){
+            $model->user_id = Yii::$app->user->id;
+            $model->image = $image = UploadedFile::getInstance($model, 'image');
+            $model->photo = Yii::$app->security->generateRandomString(12).'.'.$image->extension;
+            Yii::$app->params['uploadPath'] = Yii::$app->basePath . '/web/uploads/';
+            $path = Yii::$app->params['uploadPath'] . $model->photo;
+            if ($model->validate() && $model->save()){
+                $image->saveAs($path);
+                $model->saveCatalogs();
+                return $this->redirect(['index']);
+            }
         }
-
         return $this->render('create', [
             'model' => $model,
             'catalogs' => Catalog::getAvailableCatalogs(),
@@ -86,13 +94,19 @@ class OrganizationController extends Controller
      * @param integer $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
+     * @throws \yii\base\Exception
      */
     public function actionUpdate($id)
     {
         $model = OrganizationWithCatalog::findOne($id);
         $model->loadCatalogs();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        if ($model->load(Yii::$app->request->post())) {
+            $model->image = $image = UploadedFile::getInstance($model, 'image');
+            $model->photo = Yii::$app->security->generateRandomString(12).'.'.$image->extension;
+            Yii::$app->params['uploadPath'] = Yii::$app->basePath . '/web/uploads/';
+            $path = Yii::$app->params['uploadPath'] . $model->photo;
+            $model->save();
             $model->saveCatalogs();
             return $this->redirect(['index']);
         }

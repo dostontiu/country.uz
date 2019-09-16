@@ -27,6 +27,7 @@ use Yii;
 class Organization extends \yii\db\ActiveRecord
 {
     public $catalog;
+    public $image;
     /**
      * {@inheritdoc}
      */
@@ -41,11 +42,14 @@ class Organization extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['user_id', 'rating', 'photo', 'gps', 'name_uz', 'name_en', 'name_ru', 'description_uz', 'description_en', 'description_ru'], 'required'],
+            [['user_id', 'rating', 'gps', 'name_uz', 'name_en', 'name_ru', 'description_uz', 'description_en', 'description_ru', 'image'], 'required'],
             [['user_id', 'region_id'], 'integer'],
             [['rating', 'photo', 'gps', 'name_uz', 'name_en', 'name_ru', 'description_uz', 'description_en', 'description_ru'], 'string', 'max' => 255],
             [['region_id'], 'exist', 'skipOnError' => true, 'targetClass' => Region::className(), 'targetAttribute' => ['region_id' => 'id']],
             [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['user_id' => 'id']],
+            [['image'], 'safe'],
+            [['image'], 'file', 'extensions'=>'jpg, gif, png'],
+            [['image'], 'file', 'maxSize'=>'1048580'],
         ];
     }
 

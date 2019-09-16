@@ -11,29 +11,19 @@ $this->title = Yii::t('app', 'Regions');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="region-index">
+    <div class="container">
+        <?= GridView::widget([
+            'dataProvider' => $dataProvider,
+            'filterModel' => $searchModel,
+            'columns' => [
+                ['class' => 'yii\grid\SerialColumn'],
 
-    <h1><?= Html::encode($this->title) ?></h1>
+                'name_uz',
+                'name_en',
+                'name_ru',
 
-    <p>
-        <?= Html::a(Yii::t('app', 'Create Region'), ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
-
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
-
-    <?= GridView::widget([
-        'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
-        'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
-
-            'id',
-            'name_uz',
-            'name_en',
-            'name_ru',
-
-            ['class' => 'yii\grid\ActionColumn'],
-        ],
-    ]); ?>
-
-
+                ['class' => 'yii\grid\ActionColumn'],
+            ],
+        ]); ?>
+    </div>
 </div>
