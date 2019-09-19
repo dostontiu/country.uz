@@ -1,3 +1,8 @@
+<?php
+
+use mdm\admin\components\Helper;
+
+?>
 <aside class="main-sidebar">
 
     <section class="sidebar">
@@ -25,50 +30,65 @@
             </div>
         </form>
         <!-- /.search form -->
-
+<?php
+$menuItems = [
+    ['label' => 'Menu Yii2', 'options' => ['class' => 'header']],
+    ['label' => 'Login', 'url' => ['site/login'], 'visible' => Yii::$app->user->isGuest],
+    [
+        'label' => 'Users (RBAC)',
+        'icon' => 'group',
+        'url' => '#',
+        'items' => [
+            ['label' => 'assignment', 'icon' => 'list', 'url' => ['/rbac/assignment'],],
+            ['label' => 'role', 'icon' => 'list', 'url' => ['/rbac/role'],],
+            ['label' => 'permission', 'icon' => 'list', 'url' => ['/rbac/permission'],],
+            ['label' => 'route', 'icon' => 'list', 'url' => ['/rbac/route'],],
+            ['label' => 'rule', 'icon' => 'list', 'url' => ['/rbac/rule'],],
+            ['label' => 'menu', 'icon' => 'list', 'url' => ['/rbac/menu'],],
+        ],
+    ],
+    [
+        'label' => 'Organizations',
+        'icon' => 'institution',
+        'url' => '#',
+        'items' => [
+            ['label' => 'View all', 'icon' => 'list', 'url' => ['/organization/index'],],
+            ['label' => 'Create new', 'icon' => 'plus-circle', 'url' => ['/organization/create'],],
+        ],
+    ],
+    [
+        'label' => 'Catalogs',
+        'icon' => 'tasks',
+        'url' => '#',
+        'items' => [
+            ['label' => 'View all', 'icon' => 'list', 'url' => ['/catalog/index'],],
+            ['label' => 'Create new', 'icon' => 'plus-circle', 'url' => ['/catalog/create'],],
+        ],
+    ],
+    [
+        'label' => 'Regions',
+        'icon' => 'pie-chart',
+        'url' => '#',
+        'items' => [
+            ['label' => 'View all', 'icon' => 'list', 'url' => ['/region/index'],],
+            ['label' => 'Create new', 'icon' => 'plus-circle', 'url' => ['/region/create'],],
+        ],
+    ],
+    [
+        'label' => 'Organization catalog',
+        'icon' => 'mail-reply-all',
+        'url' => '#',
+        'items' => [
+            ['label' => 'View all', 'icon' => 'list', 'url' => ['/organization-catalog/index'],],
+            ['label' => 'Create new', 'icon' => 'plus-circle', 'url' => ['/organization-catalog/create'],],
+        ],
+    ],
+]
+?>
         <?= dmstr\widgets\Menu::widget(
             [
                 'options' => ['class' => 'sidebar-menu tree', 'data-widget'=> 'tree'],
-                'items' => [
-                    ['label' => 'Menu Yii2', 'options' => ['class' => 'header']],
-                    ['label' => 'Login', 'url' => ['site/login'], 'visible' => Yii::$app->user->isGuest],
-                    [
-                        'label' => 'Organizations',
-                        'icon' => 'institution',
-                        'url' => '#',
-                        'items' => [
-                            ['label' => 'View all', 'icon' => 'list', 'url' => ['/organization/index'],],
-                            ['label' => 'Create new', 'icon' => 'plus-circle', 'url' => ['/organization/create'],],
-                        ],
-                    ],
-                    [
-                        'label' => 'Catalogs',
-                        'icon' => 'tasks',
-                        'url' => '#',
-                        'items' => [
-                            ['label' => 'View all', 'icon' => 'list', 'url' => ['/catalog/index'],],
-                            ['label' => 'Create new', 'icon' => 'plus-circle', 'url' => ['/catalog/create'],],
-                        ],
-                    ],
-                    [
-                        'label' => 'Regions',
-                        'icon' => 'pie-chart',
-                        'url' => '#',
-                        'items' => [
-                            ['label' => 'View all', 'icon' => 'list', 'url' => ['/region/index'],],
-                            ['label' => 'Create new', 'icon' => 'plus-circle', 'url' => ['/region/create'],],
-                        ],
-                    ],
-                    [
-                        'label' => 'Organization catalog',
-                        'icon' => 'mail-reply-all',
-                        'url' => '#',
-                        'items' => [
-                            ['label' => 'View all', 'icon' => 'list', 'url' => ['/organization-catalog/index'],],
-                            ['label' => 'Create new', 'icon' => 'plus-circle', 'url' => ['/organization-catalog/create'],],
-                        ],
-                    ],
-                ],
+                'items' => Helper::filter($menuItems),
             ]
         ) ?>
 
