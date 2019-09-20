@@ -1,4 +1,8 @@
 <?php
+
+use app\modules\api\controllers\OrganizationController;
+use yii\rest\UrlRule;
+
 $params = array_merge(
     require __DIR__ . '/../../common/config/params.php',
     require __DIR__ . '/../../common/config/params-local.php',
@@ -23,10 +27,17 @@ return [
                 ],
             ],
         ],
+        'api' => [
+            'class' => 'app\modules\api\Module',
+            'layout' => false,
+        ],
     ],
     'components' => [
         'request' => [
             'csrfParam' => '_csrf-backend',
+            'parsers' => [
+                'application/json' => 'yii\web\JsonParser',
+            ],
         ],
         'user' => [
             'identityClass' => 'common\models\User',
@@ -53,6 +64,7 @@ return [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
+//                ['class' => UrlRule::className(), 'controller' => 'organizational'],
             ],
         ],
         'authManager' => [
@@ -64,7 +76,7 @@ return [
         'class' => 'mdm\admin\components\AccessControl',
         'allowActions' => [
             'site/*',
-//            '*',
+            'api/*',
 //            'rbac/*',
 //            'organization/*'
         ]

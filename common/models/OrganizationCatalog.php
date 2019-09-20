@@ -71,6 +71,11 @@ class OrganizationCatalog extends \yii\db\ActiveRecord
      */
     public static function find()
     {
-        return new \common\models\search\OrganizationCatalogQuery(get_called_class());
+        return new \common\models\search\OrganizationCatalogQuery(get_called_class()); // mashini o'chirib tashlash keremidi?
+    }
+
+    public function extraFields()
+    {
+        return ['catalog', 'organization'];
     }
 }

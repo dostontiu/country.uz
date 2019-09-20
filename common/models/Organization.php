@@ -98,4 +98,9 @@ class Organization extends \yii\db\ActiveRecord
     {
         return $this->hasMany(OrganizationCatalog::className(), ['organization_id' => 'id']);
     }
+
+    public function extraFields()
+    {
+        return ['organizationCatalogs', 'region'];
+    }
 }

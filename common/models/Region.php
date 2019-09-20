@@ -55,4 +55,9 @@ class Region extends \yii\db\ActiveRecord
     {
         return $this->hasMany(Organization::className(), ['region_id' => 'id']);
     }
+
+    public function extraFields()
+    {
+        return ['organizations'];
+    }
 }

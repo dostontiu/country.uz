@@ -93,4 +93,9 @@ class Catalog extends \yii\db\ActiveRecord
         $items = ArrayHelper::map($catalogs, 'id', 'name_uz');
         return $items;
     }
+
+    public function extraFields()
+    {
+        return ['parent', 'catalogs', 'organizationCatalogs'];
+    }
 }
