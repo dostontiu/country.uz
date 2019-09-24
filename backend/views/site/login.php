@@ -13,11 +13,10 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="site-login">
     <div class="login-box">
         <div class="login-logo">
-            <a href="../../index2.html"><b><h1><?= Html::encode($this->title) ?></h1></b></a>
+            <a href=""><b><h1><?= Html::encode($this->title) ?></h1></b></a>
         </div>
         <!-- /.login-logo -->
         <div class="login-box-body">
-            <p class="login-box-msg">Sign in to start your session</p>
                 <?php $form = ActiveForm::begin(['id' => 'login-form']); ?>
                 <div class="form-group has-feedback">
                     <?= $form->field($model, 'username')->textInput(['autofocus' => true]) ?>
@@ -40,18 +39,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     </div>
                 </div>
             <?php ActiveForm::end(); ?>
-            <div class="social-auth-links text-center">
-                <p>- OR -</p>
-                <a href="#" class="btn btn-block btn-social btn-facebook btn-flat"><i class="fa fa-facebook"></i> Sign in using
-                    Facebook</a>
-                <a href="#" class="btn btn-block btn-social btn-google btn-flat"><i class="fa fa-google-plus"></i> Sign in using
-                    Google+</a>
-            </div>
-            <!-- /.social-auth-links -->
-
-            <a href="#">I forgot my password</a><br>
-            <a href="register.html" class="text-center">Register a new membership</a>
-
+            <a href="<?= Yii::$app->homeUrl?>../../frontend/web/site/signup" class="text-center">Register a new membership</a>
         </div>
         <!-- /.login-box-body -->
     </div>
