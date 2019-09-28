@@ -40,7 +40,7 @@ class CountryController extends Controller
         $model = new Country();
         $searchModel = new CountryQuery();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-        if (Yii::$app->user->isGuest){
+        if (1==1){ //Yii::$app->user->isGuest
             return $this->goHome();
         }
 

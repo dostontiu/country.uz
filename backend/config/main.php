@@ -15,6 +15,7 @@ return [
     'basePath' => dirname(__DIR__),
     'controllerNamespace' => 'backend\controllers',
     'bootstrap' => ['log'],
+    'defaultRoute' => 'organization',
     'modules' => [
         'rbac' => [
             'class' => 'mdm\admin\Module',
@@ -34,6 +35,7 @@ return [
     ],
     'components' => [
         'request' => [
+            'baseUrl' => '/admin',
             'csrfParam' => '_csrf-backend',
             'parsers' => [
                 'application/json' => 'yii\web\JsonParser',
@@ -64,6 +66,10 @@ return [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
+//                'api' => 'admin/api',
+                'logout' => 'site/logout',
+                'login' => 'site/login',
+                '<controller:\w+>/<action:\w+>/' => '<controller>/<action>',
 //                ['class' => UrlRule::className(), 'controller' => 'organizational'],
             ],
         ],
@@ -75,7 +81,7 @@ return [
     'as access' => [
         'class' => 'mdm\admin\components\AccessControl',
         'allowActions' => [
-            'site/*',
+            'site/logout',
             'api/*',
 //            'rbac/*',
 //            'organization/*'

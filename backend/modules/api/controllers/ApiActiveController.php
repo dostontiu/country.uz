@@ -15,12 +15,13 @@ class ApiActiveController extends ActiveController
         return $actions;
     }
 
-    public function behaviors()
+    /*public function behaviors()
     {
         $behaviors = parent::behaviors();
-        $behaviors['authenticator']['authMethods'] = [
-            HttpBearerAuth::className()
-        ];
+        // enabled HttpBearerAuth
+        $behaviors['authenticator'] = [
+            'class' => HttpBearerAuth::className(),
+            ];
         return $behaviors;
-    }
+    }*/
 }

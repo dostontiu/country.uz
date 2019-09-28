@@ -13,16 +13,23 @@ use yii2mod\rating\StarRating;
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="catalog-form">
-
-    <?php $form = ActiveForm::begin(); ?>
-    <div class="container">
-        <div class="col-md-6">
+<div class="catalog-form col-md-6 col-md-offset-3">
+    <div class="kt-portlet">
+        <div class="kt-portlet__head">
+            <div class="kt-portlet__head-label">
+                <h3 class="kt-portlet__head-title">
+                    Create new
+                </h3>
+            </div>
+        </div>
+    <?php $form = ActiveForm::begin([
+        'id' => 'catalog-form',
+        'options'=>['class'=>'kt-form'],
+    ]); ?>
+        <div class="kt-portlet__body">
             <?= $form->field($model, 'name_uz')->textInput(['maxlength' => true]) ?>
             <?= $form->field($model, 'name_en')->textInput(['maxlength' => true]) ?>
             <?= $form->field($model, 'name_ru')->textInput(['maxlength' => true]) ?>
-        </div>
-        <div class="col-md-6">
             <?= $form->field($model, 'parent_id')->widget(Select2::classname(), [
                 'data' => ArrayHelper::map(Catalog::find()->where(['parent_id'=> null])->all(), 'id', 'name_en'),
                 'language' => 'en',
@@ -37,12 +44,15 @@ use yii2mod\rating\StarRating;
                 ],
             ]); ?>
             <?= $form->field($model, 'icon')->textInput(['maxlength' => true]) ?>
-                <div class="col-sm-6 col-sm-offset-3">
-                    <?= Html::submitButton(Yii::t('app', 'Save'), ['class' => 'btn btn-success btn-group-justified']) ?>
-                </div>
-        </div>
+
     </div>
-
+        <div class="kt-portlet__foot">
+            <div class="kt-form__actions kt-form__actions--right">
+                <?= Html::submitButton(Yii::t('app', 'Save'), ['class' => 'btn btn-brand']) ?>
+<!--                <button type="reset" class="btn btn-brand">Submit</button>-->
+                <button type="reset" class="btn btn-secondary">Cancel</button>
+            </div>
+        </div>
     <?php ActiveForm::end(); ?>
-
+    </div>
 </div>

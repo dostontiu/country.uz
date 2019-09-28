@@ -10,38 +10,83 @@ use yii\bootstrap\ActiveForm;
 $this->title = 'Login';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="site-login">
-    <div class="login-box">
-        <div class="login-logo">
-            <a href=""><b><h1><?= Html::encode($this->title) ?></h1></b></a>
-        </div>
-        <!-- /.login-logo -->
-        <div class="login-box-body">
-                <?php $form = ActiveForm::begin(['id' => 'login-form']); ?>
-                <div class="form-group has-feedback">
-                    <?= $form->field($model, 'username')->textInput(['autofocus' => true]) ?>
-                    <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
-                </div>
-                <div class="form-group has-feedback">
-                    <?= $form->field($model, 'password')->passwordInput() ?>
-                    <span class="glyphicon glyphicon-lock form-control-feedback"></span>
-                </div>
-                <div class="row">
-                    <div class="col-xs-7">
-                        <div class="checkbox icheck">
-                            <label>
-                                <?= $form->field($model, 'rememberMe')->checkbox() ?>
-                            </label>
-                        </div>
-                    </div>
-                    <div class="col-xs-5">
-                        <?= Html::submitButton('Login', ['class' => 'btn btn-primary btn-block', 'name' => 'login-button']) ?>
-                    </div>
-                </div>
-            <?php ActiveForm::end(); ?>
-            <a href="<?= Yii::$app->homeUrl?>../../frontend/web/site/signup" class="text-center">Register a new membership</a>
-        </div>
-        <!-- /.login-box-body -->
+<div class="kt-login__container">
+    <div class="kt-login__logo">
+        <a href="<?= Yii::$app->homeUrl?>../">
+            <img src="<?= Yii::$app->homeUrl?>admin/media/logos/logo-5.png">
+        </a>
     </div>
-    <!-- /.login-box -->
+    <div class="kt-login__signin">
+        <div class="kt-login__head">
+            <h3 class="kt-login__title">Sign In To Admin</h3>
+        </div>
+        <?php $form = ActiveForm::begin(['id' => 'login-form', 'options'=>['class'=>'kt-form'],]); ?>
+                <?= $form->field($model, 'username')->textInput(['autofocus' => true, 'placeholder'=>'Username'])->label(false) ?>
+                <?= $form->field($model, 'password')->passwordInput(['placeholder'=>'Password'])->label(false) ?>
+            <div class="row kt-login__extra">
+                <div class="col">
+                    <?= $form->field($model, 'rememberMe')->checkbox(['class'=>'kt-checkbox']) ?>
+                </div>
+            </div>
+            <div class="kt-login__actions">
+                <?= Html::submitButton('Login', ['id'=>'kt_login_signin_submit', 'class' => 'btn btn-brand btn-pill kt-login__btn-primary', 'name' => 'login-button']) ?>
+            </div>
+        <?php ActiveForm::end(); ?>
+    </div>
+    <div class="kt-login__signup">
+        <div class="kt-login__head">
+            <h3 class="kt-login__title">Sign Up</h3>
+            <div class="kt-login__desc">Enter your details to create your account:</div>
+        </div>
+        <form class="kt-form" action="">
+            <div class="input-group">
+                <input class="form-control" type="text" placeholder="Fullname" name="fullname">
+            </div>
+            <div class="input-group">
+                <input class="form-control" type="text" placeholder="Email" name="email" autocomplete="off">
+            </div>
+            <div class="input-group">
+                <input class="form-control" type="password" placeholder="Password" name="password">
+            </div>
+            <div class="input-group">
+                <input class="form-control" type="password" placeholder="Confirm Password" name="rpassword">
+            </div>
+            <div class="row kt-login__extra">
+                <div class="col kt-align-left">
+                    <label class="kt-checkbox">
+                        <input type="checkbox" name="agree">I Agree the <a href="#" class="kt-link kt-login__link kt-font-bold">terms and conditions</a>.
+                        <span></span>
+                    </label>
+                    <span class="form-text text-muted"></span>
+                </div>
+            </div>
+            <div class="kt-login__actions">
+                <button id="kt_login_signup_submit" class="btn btn-brand btn-pill kt-login__btn-primary">Sign Up</button>&nbsp;&nbsp;
+                <button id="kt_login_signup_cancel" class="btn btn-secondary btn-pill kt-login__btn-secondary">Cancel</button>
+            </div>
+        </form>
+    </div>
+    <div class="kt-login__forgot">
+        <div class="kt-login__head">
+            <h3 class="kt-login__title">Forgotten Password ?</h3>
+            <div class="kt-login__desc">Enter your email to reset your password:</div>
+        </div>
+        <form class="kt-form" action="">
+            <div class="input-group">
+                <input class="form-control" type="text" placeholder="Email" name="email" id="kt_email" autocomplete="off">
+            </div>
+            <div class="kt-login__actions">
+                <button id="kt_login_forgot_submit" class="btn btn-brand btn-pill kt-login__btn-primary">Request</button>&nbsp;&nbsp;
+                <button id="kt_login_forgot_cancel" class="btn btn-secondary btn-pill kt-login__btn-secondary">Cancel</button>
+            </div>
+        </form>
+    </div>
+    <div class="kt-login__account">
+								<span class="kt-login__account-msg">
+									Don't have an account yet ?
+								</span>
+        &nbsp;&nbsp;
+        <a href="<?= Yii::$app->homeUrl?>../signup" id="kt_login_signup" class="kt-login__account-link">Sign Up!</a>
+    </div>
 </div>
+

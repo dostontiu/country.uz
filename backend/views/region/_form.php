@@ -8,25 +8,33 @@ use yii\widgets\ActiveForm;
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="region-form">
-
-    <?php $form = ActiveForm::begin(); ?>
-    <div class="container">
-        <div class="col-md-3">
-            <?= $form->field($model, 'name_uz')->textInput(['maxlength' => true]) ?>
-        </div>
-        <div class="col-md-3">
-            <?= $form->field($model, 'name_en')->textInput(['maxlength' => true]) ?>
-        </div>
-        <div class="col-md-3">
-            <?= $form->field($model, 'name_ru')->textInput(['maxlength' => true]) ?>
-        </div>
-        <div class="col-md-3">
-            <div class="form-group"><br>
-                <?= Html::submitButton(Yii::t('app', 'Save'), ['class' => 'btn btn-success btn-group-justified']) ?>
+<div class="region-form col-md-4 col-md-offset-4">
+    <div class="kt-portlet">
+        <div class="kt-portlet__head">
+            <div class="kt-portlet__head-label">
+                <h3 class="kt-portlet__head-title">
+                    Create new
+                </h3>
             </div>
         </div>
-    </div>
-    <?php ActiveForm::end(); ?>
 
+        <?php $form = ActiveForm::begin([
+            'id' => 'region-form',
+            'options'=>['class'=>'kt-form'],
+        ]); ?>
+            <div class="kt-portlet__body">
+                <?= $form->field($model, 'name_uz')->textInput(['maxlength' => true]) ?>
+                <?= $form->field($model, 'name_en')->textInput(['maxlength' => true]) ?>
+                <?= $form->field($model, 'name_ru')->textInput(['maxlength' => true]) ?>
+            </div>
+            <div class="kt-portlet__foot">
+                <div class="kt-form__actions kt-form__actions--right">
+                    <?= Html::submitButton(Yii::t('app', 'Save'), ['class' => 'btn btn-brand']) ?>
+                    <!--                <button type="reset" class="btn btn-brand">Submit</button>-->
+                    <button type="reset" class="btn btn-secondary">Cancel</button>
+                </div>
+            </div>
+        <?php ActiveForm::end(); ?>
+
+    </div>
 </div>

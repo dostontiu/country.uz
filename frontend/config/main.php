@@ -13,6 +13,7 @@ return [
     'controllerNamespace' => 'frontend\controllers',
     'components' => [
         'request' => [
+            'baseUrl' => '',
             'csrfParam' => '_csrf-frontend',
         ],
         'user' => [
@@ -41,14 +42,17 @@ return [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
+                '' => 'site/index',
+                'signup' => 'site/signup',
+                '<controller:\w+>/<action:\w+>/' => '<controller>/<action>',
             ],
         ],
 
     ],
     'params' => $params,
-    'modules' => [
-        'api' => [
-            'class' => 'app\modules\api\Module',
-        ],
-    ],
+//    'modules' => [
+//        'apidel' => [
+//            'class' => 'app\modules\apidel\Module',
+//        ],
+//    ],
 ];

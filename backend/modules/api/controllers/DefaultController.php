@@ -5,7 +5,7 @@ namespace app\modules\api\controllers;
 use yii\web\Controller;
 
 /**
- * Default controller for the `api` module
+ * Default controller for the `apidel` module
  */
 class DefaultController extends Controller
 {
