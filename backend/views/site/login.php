@@ -18,18 +18,18 @@ $this->params['breadcrumbs'][] = $this->title;
     </div>
     <div class="kt-login__signin">
         <div class="kt-login__head">
-            <h3 class="kt-login__title">Sign In To Admin</h3>
+            <h3 class="kt-login__title">Вход в систему</h3>
         </div>
         <?php $form = ActiveForm::begin(['id' => 'login-form', 'options'=>['class'=>'kt-form'],]); ?>
-                <?= $form->field($model, 'username')->textInput(['autofocus' => true, 'placeholder'=>'Username'])->label(false) ?>
-                <?= $form->field($model, 'password')->passwordInput(['placeholder'=>'Password'])->label(false) ?>
+                <?= $form->field($model, 'username')->textInput(['autofocus' => true, 'placeholder'=>'Логин'])->label(false) ?>
+                <?= $form->field($model, 'password')->passwordInput(['placeholder'=>'Пароль'])->label(false) ?>
             <div class="row kt-login__extra">
                 <div class="col">
-                    <?= $form->field($model, 'rememberMe')->checkbox(['class'=>'kt-checkbox']) ?>
+                    <?= $form->field($model, 'rememberMe')->checkbox(['class'=>'kt-checkbox'])->label('Запомнить?') ?>
                 </div>
             </div>
             <div class="kt-login__actions">
-                <?= Html::submitButton('Login', ['id'=>'kt_login_signin_submit', 'class' => 'btn btn-brand btn-pill kt-login__btn-primary', 'name' => 'login-button']) ?>
+                <?= Html::submitButton('Войти', ['id'=>'kt_login_signin_submit', 'class' => 'btn btn-brand btn-pill kt-login__btn-primary', 'name' => 'login-button']) ?>
             </div>
         <?php ActiveForm::end(); ?>
     </div>

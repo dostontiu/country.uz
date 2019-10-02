@@ -9,7 +9,7 @@ use yii2mod\rating\StarRating;
 /* @var $this yii\web\View */
 /* @var $model common\models\Organization */
 
-$this->title = 'Organization : '.$model->name_en;
+$this->title = 'Организацию : '.$model->name_en;
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Organizations'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
@@ -33,7 +33,7 @@ function rate($id){
         [
             'language' => 'en-Us', // map language, default is the same as in the app
             'service' => 'yandex', // map service provider, "google" or "yandex", default "google"
-            'mapWidth' => '1600px', // width map container, default "500px"
+            'mapWidth' => '1200px', // width map container, default "500px"
             'mapHeight' => '500px', // height map container, default "500px"
             'mapZoom' => '17', // map zoom value, default "10"
             'mapCenter' => [55.753338, 37.622861], // coordinates center map with an empty attribute, default Moscow
@@ -83,11 +83,11 @@ function rate($id){
                 ],
             ]) ?>
             <p>
-                <?= Html::a(Yii::t('app', 'Update'), ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-                <?= Html::a(Yii::t('app', 'Delete'), ['delete', 'id' => $model->id], [
+                <?= Html::a(Yii::t('app', 'Обновить'), ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+                <?= Html::a(Yii::t('app', 'Удалить'), ['delete', 'id' => $model->id], [
                     'class' => 'btn btn-danger',
                     'data' => [
-                        'confirm' => Yii::t('app', 'Are you sure you want to delete this item?'),
+                        'confirm' => Yii::t('app', 'Вы уверены, что хотите удалить данный?'),
                         'method' => 'post',
                     ],
                 ]) ?>

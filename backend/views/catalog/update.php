@@ -5,7 +5,7 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model common\models\Catalog */
 
-$this->title = Yii::t('app', 'Update Catalog : {name}', [
+$this->title = Yii::t('app', 'Обновить каталог : {name}', [
     'name' => $model->name_en,
 ]);
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Catalogs'), 'url' => ['index']];

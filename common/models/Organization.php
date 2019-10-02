@@ -60,18 +60,18 @@ class Organization extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'user_id' => 'User ID',
-            'region_id' => 'Region ID',
-            'rating' => 'Rating',
-            'photo' => 'Photo',
-            'gps' => 'Gps',
-            'name_uz' => 'Name Uz',
-            'name_en' => 'Name En',
-            'name_ru' => 'Name Ru',
-            'description_uz' => 'Description Uz',
-            'description_en' => 'Description En',
-            'description_ru' => 'Description Ru',
-            'catalog' => 'Catalog',
+            'user_id' => 'Пользователь',
+            'region_id' => 'Область',
+            'rating' => 'Рейтинг',
+            'photo' => 'Фото',
+            'gps' => 'GPS',
+            'name_uz' => 'Название (UZ)',
+            'name_en' => 'Название (EN)',
+            'name_ru' => 'Название (RU)',
+            'description_uz' => 'Описание (UZ)',
+            'description_en' => 'Описание (EN)',
+            'description_ru' => 'Описание (РУ)',
+            'catalog' => 'Каталог',
         ];
     }
 

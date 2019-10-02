@@ -50,12 +50,12 @@ class Catalog extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'parent_id' => 'Parent ID',
-            'rating' => 'Rating',
-            'icon' => 'Icon',
-            'name_uz' => 'Name Uz',
-            'name_en' => 'Name En',
-            'name_ru' => 'Name Ru',
+            'parent_id' => 'ID родителя',
+            'rating' => 'Рейтинг',
+            'icon' => 'Икона',
+            'name_uz' => 'Название (UZ)',
+            'name_en' => 'Название (EN)',
+            'name_ru' => 'Название (RU)',
         ];
     }
 

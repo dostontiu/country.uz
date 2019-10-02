@@ -13,7 +13,7 @@ use yii\widgets\ActiveForm;
         <div class="kt-portlet__head">
             <div class="kt-portlet__head-label">
                 <h3 class="kt-portlet__head-title">
-                    Create new
+                    Создайте новый
                 </h3>
             </div>
         </div>
@@ -29,9 +29,9 @@ use yii\widgets\ActiveForm;
             </div>
             <div class="kt-portlet__foot">
                 <div class="kt-form__actions kt-form__actions--right">
-                    <?= Html::submitButton(Yii::t('app', 'Save'), ['class' => 'btn btn-brand']) ?>
+                    <?= Html::submitButton(Yii::t('app', 'Сохранить'), ['class' => 'btn btn-brand']) ?>
                     <!--                <button type="reset" class="btn btn-brand">Submit</button>-->
-                    <button type="reset" class="btn btn-secondary">Cancel</button>
+                    <button type="reset" class="btn btn-secondary">Отмена</button>
                 </div>
             </div>
         <?php ActiveForm::end(); ?>

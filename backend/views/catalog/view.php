@@ -7,7 +7,7 @@ use yii2mod\rating\StarRating;
 /* @var $this yii\web\View */
 /* @var $model common\models\Catalog */
 
-$this->title = 'Catalog : '.$model->name_en;
+$this->title = 'Каталог : '.$model->name_en;
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Catalogs'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
@@ -46,11 +46,11 @@ function rate($id){
             ],
         ]) ?>
         <p>
-            <?= Html::a(Yii::t('app', 'Update'), ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-            <?= Html::a(Yii::t('app', 'Delete'), ['delete', 'id' => $model->id], [
+            <?= Html::a(Yii::t('app', 'Обновить'), ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+            <?= Html::a(Yii::t('app', 'Удалить'), ['delete', 'id' => $model->id], [
                 'class' => 'btn btn-danger',
                 'data' => [
-                    'confirm' => Yii::t('app', 'Are you sure you want to delete this item?'),
+                    'confirm' => Yii::t('app', 'Вы уверены, что хотите удалить данный?'),
                     'method' => 'post',
                 ],
             ]) ?>

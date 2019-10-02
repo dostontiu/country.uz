@@ -19,7 +19,7 @@ use yii2mod\rating\StarRating;
         <div class="kt-portlet__head">
             <div class="kt-portlet__head-label">
                 <h3 class="kt-portlet__head-title">
-                    Create new
+                    Создайте новый
                 </h3>
             </div>
         </div>
@@ -37,7 +37,7 @@ use yii2mod\rating\StarRating;
                     'service' => 'yandex', // map service provider, "google" or "yandex", default "google"
         //                    'apiKey' => '', // required google maps
         //                    'coordinatesDelimiter' => '@', // attribute coordinate string delimiter, default "@" (lat@lng)
-                    'mapWidth' => '1400px', // width map container, default "500px"
+                    'mapWidth' => '1300px', // width map container, default "500px"
                     'mapHeight' => '500px', // height map container, default "500px"
                     'mapZoom' => '16', // map zoom value, default "10"
                     'mapCenter' => [55.753338, 37.622861], // coordinates center map with an empty attribute, default Moscow
@@ -92,7 +92,7 @@ use yii2mod\rating\StarRating;
                     </div>
                     <div class="col-sm-12">
                         <div class="form-group">
-                            <?= Html::submitButton(Yii::t('app', 'Save'), ['class' => 'btn btn-brand btn-group-justified']) ?>
+                            <?= Html::submitButton(Yii::t('app', 'Сохранить'), ['class' => 'btn btn-brand btn-group-justified']) ?>
                         </div>
                     </div>
                 </div>

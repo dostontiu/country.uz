@@ -18,7 +18,7 @@ use yii2mod\rating\StarRating;
         <div class="kt-portlet__head">
             <div class="kt-portlet__head-label">
                 <h3 class="kt-portlet__head-title">
-                    Create new
+                    Создайте новый
                 </h3>
             </div>
         </div>
@@ -33,14 +33,14 @@ use yii2mod\rating\StarRating;
             <?= $form->field($model, 'parent_id')->widget(Select2::classname(), [
                 'data' => ArrayHelper::map(Catalog::find()->where(['parent_id'=> null])->all(), 'id', 'name_en'),
                 'language' => 'en',
-                'options' => ['placeholder' => 'Select a region ...'],
+                'options' => ['placeholder' => 'Выберите регион ...'],
                 'pluginOptions' => [
                     'allowClear' => true
                 ],
             ]); ?>
             <?= $form->field($model, 'rating')->widget(StarRating::className(), [
                 'clientOptions' => [
-                    'hints' => ['bad', 'poor', 'regular', 'good', 'zooor'],
+                    'hints' => ['Плохо', 'бедных', 'регулярный', 'хороший', 'великолепный'],
                 ],
             ]); ?>
             <?= $form->field($model, 'icon')->textInput(['maxlength' => true]) ?>
@@ -48,9 +48,9 @@ use yii2mod\rating\StarRating;
     </div>
         <div class="kt-portlet__foot">
             <div class="kt-form__actions kt-form__actions--right">
-                <?= Html::submitButton(Yii::t('app', 'Save'), ['class' => 'btn btn-brand']) ?>
+                <?= Html::submitButton(Yii::t('app', 'Сохранить'), ['class' => 'btn btn-brand']) ?>
 <!--                <button type="reset" class="btn btn-brand">Submit</button>-->
-                <button type="reset" class="btn btn-secondary">Cancel</button>
+                <button type="reset" class="btn btn-secondary">Отмена</button>
             </div>
         </div>
     <?php ActiveForm::end(); ?>

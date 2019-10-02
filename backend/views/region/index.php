@@ -7,7 +7,7 @@ use yii\grid\GridView;
 /* @var $searchModel common\models\search\RegionQuery */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = Yii::t('app', 'Regions');
+$this->title = Yii::t('app', 'Районы');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="region-index">
@@ -25,12 +25,12 @@ $this->params['breadcrumbs'][] = $this->title;
                 <div class="kt-portlet__head-wrapper">
                     <a href="<?=Yii::$app->homeUrl?>" class="btn btn-clean btn-icon-sm">
                         <i class="la la-long-arrow-left"></i>
-                        Back
+                        назад
                     </a>
                     &nbsp;
                     <div class="dropdown dropdown-inline">
                         <a href="<?=Yii::$app->homeUrl?>region/create" class="btn btn-brand btn-icon-sm">
-                            <i class="flaticon2-plus"></i> Add New
+                            <i class="flaticon2-plus"></i> Добавить
                         </a>
                     </div>
                 </div>
@@ -52,7 +52,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
                 [
                     'class' => 'yii\grid\ActionColumn',
-                    'header' => 'Actions',
+                    'header' => 'Действия',
                     'headerOptions' => ['style' => 'color:#5867dd'],
                     'template' => '{view}{update}{delete}',
                     'buttons' => [
@@ -70,6 +70,9 @@ $this->params['breadcrumbs'][] = $this->title;
                         'delete' => function ($url, $model) {
                             return Html::a('<span class="la la-lg la-trash"> </span>', $url, [
                                 'title' => Yii::t('app', 'delete'),
+                                'aria-label' => Yii::t('app', 'Удаление'),
+                                'data-confirm' => Yii::t('app', 'Вы уверены, что хотите удалить данное заведение?'),
+                                'data-method' => 'post',
                             ]);
                         }
 

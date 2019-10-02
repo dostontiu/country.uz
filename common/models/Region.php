@@ -42,9 +42,9 @@ class Region extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'name_uz' => 'Name Uz',
-            'name_en' => 'Name En',
-            'name_ru' => 'Name Ru',
+            'name_uz' => 'Название (UZ)',
+            'name_en' => 'Название (EN)',
+            'name_ru' => 'Название (RU)',
         ];
     }
 
