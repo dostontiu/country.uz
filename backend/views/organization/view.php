@@ -27,71 +27,100 @@ function rate($id){
 
 ?>
 <div class="organization-view">
-    <?php $form = ActiveForm::begin();
-    echo $form->field($model, 'gps')->widget(
-        MapInput::className(),
-        [
-            'language' => 'en-Us', // map language, default is the same as in the app
-            'service' => 'yandex', // map service provider, "google" or "yandex", default "google"
-            'mapWidth' => '1200px', // width map container, default "500px"
-            'mapHeight' => '500px', // height map container, default "500px"
-            'mapZoom' => '17', // map zoom value, default "10"
-            'mapCenter' => [55.753338, 37.622861], // coordinates center map with an empty attribute, default Moscow
-        ]
-    );
-    ActiveForm::end();
-    ?>
-    <div class="container">
 
-            <?= DetailView::widget([
-                'model' => $model,
-                'attributes' => [
-                    'id',
-                    [
-                        'attribute' => 'user_id',
-                        'label' => 'User',
-                        'value' => $model->user->username,
-                    ],
-                    [
-                        'attribute' => 'region_id',
-                        'label' => 'Region',
-                        'value' => $model->region->name_ru,
-                    ],
-                    [
-                        'attribute' => 'rating',
-                        'value' => rate($model->rating),
-                        'format' => 'raw'
-                    ],
-                    'gps:url',
-                    'name_tj',
-                    'name_en',
-                    'name_ru',
-                    'description_tj:html',
-                    'description_en:html',
-                    'description_ru:html',
-                    [
-                        'attribute' => 'photo',
-                        'format' => 'raw',
-                        'value' => function($model){
-                            if (file_exists('uploads/'.$model->photo)){
-                                return Html::img(Yii::$app->homeUrl. '/uploads/'.$model->photo, ['style'=>'width:600px']);
-                            } else {
-                                return Html::img(Yii::$app->homeUrl. '/uploads/nophoto.png', ['style'=>'width:300px']);
-                            }
-                        },
-                    ],
-                ],
-            ]) ?>
-            <p>
-                <?= Html::a(Yii::t('app', 'Обновить'), ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-                <?= Html::a(Yii::t('app', 'Удалить'), ['delete', 'id' => $model->id], [
-                    'class' => 'btn btn-danger',
-                    'data' => [
-                        'confirm' => Yii::t('app', 'Вы уверены, что хотите удалить данный?'),
-                        'method' => 'post',
-                    ],
-                ]) ?>
-            </p>
+    <div class="col-md-6">
+        <div class="kt-portlet kt-portlet--mobile">
+            <div class="kt-portlet__head kt-portlet__head--lg">
+                <div class="kt-portlet__head-label">
+										<span class="kt-portlet__head-icon">
+											<i class="kt-font-brand flaticon2-line-chart"></i>
+										</span>
+                    <h3 class="kt-portlet__head-title">
+                        <?=Html::encode($this->title)?>
+                    </h3>
+                </div>
+                <div class="kt-portlet__head-toolbar">
+                    <div class="kt-portlet__head-wrapper">
+                            <?= Html::a(Yii::t('app', 'Обновить'), ['update', 'id' => $model->id], ['class' => 'btn btn-brand btn-icon-sm']) ?>
+                            <?= Html::a(Yii::t('app', 'Удалить'), ['delete', 'id' => $model->id], [
+                                'class' => 'btn btn-danger btn-icon-sm',
+                                'data' => [
+                                    'confirm' => Yii::t('app', 'Вы уверены, что хотите удалить данный?'),
+                                    'method' => 'post',
+                                ],
+                            ]) ?>
+                    </div>
+                </div>
+            </div>
+            <div class="kt-portlet__body kt-portlet__body--fit">
+                <div class="kt-portlet__body">
+                    <?= DetailView::widget([
+                        'model' => $model,
+                        'options' => ['class' => 'table kt-datatable__table'],
+                        'attributes' => [
+                            'id',
+                            [
+                                'attribute' => 'user_id',
+                                'value' => $model->user->username,
+                            ],
+                            [
+                                'attribute' => 'region_id',
+                                'value' => $model->region->name_ru,
+                            ],
+                            [
+                                'attribute' => 'rating',
+                                'value' => rate($model->rating),
+                                'format' => 'raw'
+                            ],
+                            'gps',
+                            'name_tj',
+                            'name_en',
+                            'name_ru',
+                            'description_tj:html',
+                            'description_en:html',
+                            'description_ru:html',
+                            'photo',
+                        ],
+                    ]) ?>
+                </div>
+            </div>
+        </div>
     </div>
+    <div class="col-md-6">
+        <div class="kt-portlet kt-portlet--height-fluid kt-widget19">
+            <div class="kt-portlet__body kt-portlet__body--fit kt-portlet__body--unfill">
+                <div class="kt-widget19__pic kt-portlet-fit--top kt-portlet-fit--sides" style="min-height: 300px; background-image: url(<?= Yii::$app->homeUrl.'uploads/'.$model->photo?>)">
+                    <h3 class="kt-widget19__title kt-font-light"><?=$model->name_ru?></h3>
+                    <div class="kt-widget19__shadow"></div>
+                </div>
+            </div>
+        </div>
 
+        <div class="kt-portlet kt-portlet--head--noborder kt-portlet--height-fluid">
+            <div class="kt-portlet__head">
+                <div class="kt-portlet__head-label">
+                    <h3 class="kt-portlet__head-title">Место нахождения</h3>
+                </div>
+            </div>
+            <div class="kt-portlet__body">
+                <div class="kt-widget15">
+                    <?php $form = ActiveForm::begin();
+                    echo $form->field($model, 'gps')->widget(
+                        MapInput::className(),
+                        [
+                            'language' => 'ru-RU', // map language, default is the same as in the app
+                            'service' => 'yandex', // map service provider, "google" or "yandex", default "google"
+                            'mapWidth' => '100%', // width map container, default "500px"
+                            'mapHeight' => '400px', // height map container, default "500px"
+                            'mapZoom' => '12', // map zoom value, default "10"
+//                            'mapCenter' => [55.753338, 37.622861], // coordinates center map with an empty attribute, default Moscow
+                        ]
+                    )->label(false);
+                    ActiveForm::end();
+                    ?>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

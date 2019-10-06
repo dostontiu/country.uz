@@ -65,7 +65,7 @@ class Organization extends \yii\db\ActiveRecord
             'region_id' => 'Область',
             'rating' => 'Рейтинг',
             'photo' => 'Фото',
-            'gps' => 'GPS',
+            'gps' => 'Геолокация',
             'name_tj' => 'Название (TJ)',
             'name_en' => 'Название (EN)',
             'name_ru' => 'Название (RU)',
