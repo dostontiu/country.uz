@@ -26086,7 +26086,7 @@ body {
   .kt-header--fixed .kt-wrapper {
     padding-top: 65px; }
   .kt-header--fixed.kt-subheader--fixed.kt-subheader--enabled .kt-wrapper {
-    padding-top: 119px; }
+    /*padding-top: 119px;*/ }
   .kt-wrapper {
     -webkit-transition: all 0.3s ease;
     transition: all 0.3s ease; }

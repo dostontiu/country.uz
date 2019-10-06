@@ -14,7 +14,7 @@ class m190826_212155_region extends Migration
     {
         $this->createTable('region', [
             'id' => $this->primaryKey(),
-            'name_uz' => $this->string()->notNull(),
+            'name_tj' => $this->string()->notNull(),
             'name_en' => $this->string()->notNull(),
             'name_ru' => $this->string()->notNull(),
         ]);

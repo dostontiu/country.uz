@@ -19,12 +19,12 @@ class m190911_073735_organizations extends Migration
             'rating' => $this->string()->notNull(), // this should be integer
             'photo' => $this->string()->notNull(),
             'gps' => $this->string()->notNull(),
-            'name_uz' => $this->string()->notNull(),
-            'name_en' => $this->string()->notNull(),
-            'name_ru' => $this->string()->notNull(),
-            'description_uz' => $this->string()->notNull(),
-            'description_en' => $this->string()->notNull(),
-            'description_ru' => $this->string()->notNull(),
+            'name_tj' => $this->string()->null(),
+            'name_en' => $this->string()->null(),
+            'name_ru' => $this->string()->null(),
+            'description_tj' => $this->string()->null(),
+            'description_en' => $this->string()->null(),
+            'description_ru' => $this->string()->null(),
         ]);
 
         // creates index for column `user_id`

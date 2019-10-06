@@ -23,9 +23,9 @@ use yii\widgets\ActiveForm;
             'options'=>['class'=>'kt-form'],
         ]); ?>
             <div class="kt-portlet__body">
-                <?= $form->field($model, 'name_uz')->textInput(['maxlength' => true]) ?>
-                <?= $form->field($model, 'name_en')->textInput(['maxlength' => true]) ?>
+                <?= $form->field($model, 'name_tj')->textInput(['maxlength' => true]) ?>
                 <?= $form->field($model, 'name_ru')->textInput(['maxlength' => true]) ?>
+                <?= $form->field($model, 'name_en')->textInput(['maxlength' => true]) ?>
             </div>
             <div class="kt-portlet__foot">
                 <div class="kt-form__actions kt-form__actions--right">

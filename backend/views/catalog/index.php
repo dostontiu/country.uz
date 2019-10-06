@@ -3,7 +3,6 @@
 use common\models\Catalog;
 use yii\helpers\Html;
 use yii\grid\GridView;
-use yii2mod\rating\StarRating;
 
 /* @var $this yii\web\View */
 /* @var $searchModel common\models\search\CatalogQuery */
@@ -12,7 +11,7 @@ use yii2mod\rating\StarRating;
 $this->title = Yii::t('app', 'Каталоги');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="catalog-index">
+<div class="catalog-index col-md-6 col-md-offset-3">
     <div class="kt-portlet kt-portlet--mobile">
         <div class="kt-portlet__head kt-portlet__head--lg">
             <div class="kt-portlet__head-label">
@@ -47,36 +46,14 @@ $this->params['breadcrumbs'][] = $this->title;
                 'tableOptions' => ['class' => 'table kt-datatable__table'],
                 'columns' => [
                     ['class' => 'yii\grid\SerialColumn'],
-                    'name_uz',
-                    'name_en',
-                    'name_ru',
-                    'icon',
-                    [
-                        'attribute' => 'rating',
-                        'format' => 'text',
-                        'content' => function($model){
-                            return StarRating::widget([
-                                'name' => 'input_name',
-                                'value' => $model->rating,
-                                'clientOptions' => [
-                                    'readOnly' => true,
-                                ],
-                            ]);
-                        },
-                        'filter' =>  Html::activeDropDownList(
-                            $searchModel,
-                            'rating',
-                            array(1=>"1+",2=>"2+",3=>"3+",4=>"4+",5=>"5+"),
-                            ['class'=>'form-control','prompt' => 'Все']
-                        ),
-                    ],
+                    'fullName:html',
                     [
                         'attribute' => 'parent_id',
                         'label' => 'Родитель',
                         'value' => function($model){
-                            return ($model->parent_id!=null) ? $model->parent->name_en : '';
+                            return ($model->parent_id!=null) ? $model->parent->name_ru : '';
                         },
-                        'filter' => Catalog::find()->select(['name_en', 'id'])->indexBy('id')->column(),
+                        'filter' => Catalog::find()->select(['name_ru', 'id'])->indexBy('id')->column(),
                         'filterInputOptions' => [
                             'class' => 'form-control',
                             'prompt' => 'Все',
@@ -86,14 +63,8 @@ $this->params['breadcrumbs'][] = $this->title;
                         'class' => 'yii\grid\ActionColumn',
                         'header' => 'Действия',
                         'headerOptions' => ['style' => 'color:#5867dd'],
-                        'template' => '{view}{update}{delete}',
+                        'template' => '{update}{delete}',
                         'buttons' => [
-                            'view' => function ($url, $model) {
-                                return Html::a('<span class="la la-lg la-cog"> </span>', $url, [
-                                    'title' => Yii::t('app', 'view'),
-                                ]);
-                            },
-
                             'update' => function ($url, $model) {
                                 return Html::a('<span class="la la-lg la-edit"> </span>', $url, [
                                     'title' => Yii::t('app', 'update'),

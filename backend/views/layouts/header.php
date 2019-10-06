@@ -1,7 +1,6 @@
 <?php
 
 use backend\assets\AdminAsset;
-use dmstr\widgets\Alert;
 use yii\helpers\Html;
 
 AdminAsset::register($this);
@@ -130,7 +129,7 @@ AdminAsset::register($this);
                             <li class="kt-menu__item  kt-menu__item--submenu <?=(Yii::$app->controller->id=='region')?'kt-menu__item--open kt-menu__item--here':''?>" aria-haspopup="true" data-ktmenu-submenu-toggle="hover"><a href="javascript:;" class="kt-menu__link kt-menu__toggle"><i class="kt-menu__link-icon fa fa-city"></i><span class="kt-menu__link-text">Область</span><i class="kt-menu__ver-arrow la la-angle-right"></i></a>
                                 <div class="kt-menu__submenu "><span class="kt-menu__arrow"></span>
                                     <ul class="kt-menu__subnav">
-                                        <li class="kt-menu__item <?=($this->context->route=='region/index')?'kt-menu__item--active':''?>" aria-haspopup="true"><a href="<?= Yii::$app->homeUrl?>region/index" class="kt-menu__link "><i class="kt-menu__link-icon fa fa-list"></i><span class="kt-menu__link-text">Все регионы</span></a></li>
+                                        <li class="kt-menu__item <?=($this->context->route=='region/index')?'kt-menu__item--active':''?>" aria-haspopup="true"><a href="<?= Yii::$app->homeUrl?>region/index" class="kt-menu__link "><i class="kt-menu__link-icon fa fa-list"></i><span class="kt-menu__link-text">Все области</span></a></li>
                                         <li class="kt-menu__item <?=($this->context->route=='region/create')?'kt-menu__item--active':''?>" aria-haspopup="true"><a href="<?= Yii::$app->homeUrl?>region/create" class="kt-menu__link "><i class="kt-menu__link-icon flaticon2-plus-1"></i><span class="kt-menu__link-text">Добавить</span></a></li>
                                     </ul>
                                 </div>
@@ -178,7 +177,21 @@ AdminAsset::register($this);
                 <div class="kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor">
                     <!-- begin:: Content -->
                     <div class="kt-content  kt-grid__item kt-grid__item--fluid" id="kt_content">
-                        <?= Alert::widget() ?>
+<!--                        // display success message-->
+                        <?php if( Yii::$app->session->hasFlash('success') ): ?>
+                            <div class="alert alert-success alert-dismissible" role="alert">
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                <?php echo Yii::$app->session->getFlash('success'); ?>
+                            </div>
+                        <?php endif;?>
+
+<!--                        // display error message-->
+                        <?php if( Yii::$app->session->hasFlash('error') ): ?>
+                            <div class="alert alert-danger alert-dismissible" role="alert">
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                <?php echo Yii::$app->session->getFlash('error'); ?>
+                            </div>
+                        <?php endif;?>
                         <?= $content ?>
                     </div>
 

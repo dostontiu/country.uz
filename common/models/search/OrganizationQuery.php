@@ -11,6 +11,8 @@ use common\models\Organization;
  */
 class OrganizationQuery extends Organization
 {
+    /* your calculated attribute */
+    public $fullName;
 
     /**
      * {@inheritdoc}
@@ -19,7 +21,7 @@ class OrganizationQuery extends Organization
     {
         return [
             [['id', 'user_id', 'region_id'], 'integer'],
-            [['rating', 'photo', 'gps', 'name_uz', 'name_en', 'name_ru', 'description_uz', 'description_en', 'description_ru', 'catalog'], 'safe'],
+            [['rating', 'photo', 'gps', 'name_tj', 'name_en', 'name_ru', 'description_tj', 'description_en', 'description_ru', 'catalog', 'fullName'], 'safe'],
         ];
     }
 
@@ -48,6 +50,19 @@ class OrganizationQuery extends Organization
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
         ]);
+        $dataProvider->setSort([
+            'attributes' => [
+                'id',
+                'fullName' => [
+                    'asc' => ['name_tj' => SORT_ASC, 'name_en' => SORT_ASC, 'name_ru' => SORT_ASC],
+                    'desc' => ['name_tj' => SORT_DESC, 'name_en' => SORT_DESC, 'name_ru' => SORT_DESC],
+                    'label' => 'Full Name',
+                    'default' => SORT_ASC
+                ],
+                'region_id',
+                'rating',
+            ]
+        ]);
 
         $this->load($params);
 
@@ -56,9 +71,14 @@ class OrganizationQuery extends Organization
             // $query->where('0=1');
             return $dataProvider;
         }
-        $catalog_filter = [];
-        if (!empty($this->catalog)){
-            $catalog_filter = ['in', 'id',explode(',', $this->catalog)];
+            $catalg = explode('|',$this->catalog)[1];
+        if (!empty($catalg)){
+            $catalog_filter = ['in', 'id',explode(',', $catalg)];
+        } else {
+            $catalog_filter = ['id' => 0];
+        }
+        if (empty($this->catalog)){
+            $catalog_filter = [];
         }
         // grid filtering conditions
         $query->andFilterWhere([
@@ -67,14 +87,18 @@ class OrganizationQuery extends Organization
             'region_id' => $this->region_id,
         ]);
 
-
+        $query->andWhere(
+            'name_tj LIKE "%' . $this->fullName  . '%" '
+            .'OR name_en LIKE "%' . $this->fullName . '%"'
+            .'OR name_ru LIKE "%' . $this->fullName . '%"'
+        );
         $query->andFilterWhere(['like', 'rating', $this->rating])
             ->andFilterWhere(['like', 'photo', $this->photo])
             ->andFilterWhere(['like', 'gps', $this->gps])
-            ->andFilterWhere(['like', 'name_uz', $this->name_uz])
+            ->andFilterWhere(['like', 'name_tj', $this->name_tj])
             ->andFilterWhere(['like', 'name_en', $this->name_en])
             ->andFilterWhere(['like', 'name_ru', $this->name_ru])
-            ->andFilterWhere(['like', 'description_uz', $this->description_uz])
+            ->andFilterWhere(['like', 'description_tj', $this->description_tj])
             ->andFilterWhere(['like', 'description_en', $this->description_en])
             ->andFilterWhere(['like', 'description_en', $this->description_en])
             ->andFilterWhere($catalog_filter);

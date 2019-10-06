@@ -10,7 +10,7 @@ use yii\grid\GridView;
 $this->title = Yii::t('app', 'Районы');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="region-index">
+<div class="region-index col-md-6 col-md-offset-3">
     <div class="kt-portlet kt-portlet--mobile">
         <div class="kt-portlet__head kt-portlet__head--lg">
             <div class="kt-portlet__head-label">
@@ -45,23 +45,13 @@ $this->params['breadcrumbs'][] = $this->title;
             'tableOptions' => ['class' => 'table kt-datatable__table'],
             'columns' => [
                 ['class' => 'yii\grid\SerialColumn'],
-
-                'name_uz',
-                'name_en',
-                'name_ru',
-
+                'fullName:html',
                 [
                     'class' => 'yii\grid\ActionColumn',
                     'header' => 'Действия',
                     'headerOptions' => ['style' => 'color:#5867dd'],
-                    'template' => '{view}{update}{delete}',
+                    'template' => '{update}{delete}',
                     'buttons' => [
-                        'view' => function ($url, $model) {
-                            return Html::a('<span class="la la-lg la-cog"> </span>', $url, [
-                                'title' => Yii::t('app', 'view'),
-                            ]);
-                        },
-
                         'update' => function ($url, $model) {
                             return Html::a('<span class="la la-lg la-edit"> </span>', $url, [
                                 'title' => Yii::t('app', 'update'),

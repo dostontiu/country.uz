@@ -4,15 +4,15 @@ namespace common\models;
 
 use Yii;
 use yii\helpers\ArrayHelper;
+use yii\helpers\Html;
 
 /**
  * This is the model class for table "{{%catalog}}".
  *
  * @property int $id
  * @property int $parent_id
- * @property int $rating
  * @property string $icon
- * @property string $name_uz
+ * @property string $name_tj
  * @property string $name_en
  * @property string $name_ru
  *
@@ -22,6 +22,8 @@ use yii\helpers\ArrayHelper;
  */
 class Catalog extends \yii\db\ActiveRecord
 {
+    public $image;
+
     /**
      * {@inheritdoc}
      */
@@ -36,10 +38,13 @@ class Catalog extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['parent_id', 'rating'], 'integer'],
-            [['rating', 'icon', 'name_uz', 'name_en', 'name_ru'], 'required'],
-            [['icon', 'name_uz', 'name_en', 'name_ru'], 'string', 'max' => 255],
+            [['parent_id'], 'integer'],
+            [['name_tj', 'name_en', 'name_ru'], 'required'],
+            [['icon', 'name_tj', 'name_en', 'name_ru'], 'string', 'max' => 255],
             [['parent_id'], 'exist', 'skipOnError' => true, 'targetClass' => Catalog::className(), 'targetAttribute' => ['parent_id' => 'id']],
+            [['image'], 'safe'],
+            [['image'], 'file', 'extensions'=>'jpg, gif, png'],
+            [['image'], 'file', 'maxSize'=>'1048580'],
         ];
     }
 
@@ -51,11 +56,11 @@ class Catalog extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'parent_id' => 'ID родителя',
-            'rating' => 'Рейтинг',
             'icon' => 'Икона',
-            'name_uz' => 'Название (UZ)',
+            'name_tj' => 'Название (TJ)',
             'name_en' => 'Название (EN)',
             'name_ru' => 'Название (RU)',
+            'fullName' => 'Название',
         ];
     }
 
@@ -89,13 +94,30 @@ class Catalog extends \yii\db\ActiveRecord
      */
     public static function getAvailableCatalogs()
     {
-        $catalogs = self::find()->orderBy('name_uz')->asArray()->all();
-        $items = ArrayHelper::map($catalogs, 'id', 'name_uz');
+        $catalogs = self::find()->orderBy('name_tj')->asArray()->all();
+        $items = ArrayHelper::map($catalogs, 'id', 'name_tj');
         return $items;
+    }
+
+    /* Getter for all name */
+    public function getFullName() {
+        return Html::a(($this->name_ru)?$this->name_ru:'На другом языке','view?id='.$this->id);
     }
 
     public function extraFields()
     {
         return ['parent', 'catalogs', 'organizationCatalogs'];
+    }
+
+    public function beforeSave($insert)
+    {
+        if (!parent::beforeSave($insert)) {
+            return false;
+        }
+        if ($this->icon==null){
+            Yii::$app->session->setFlash('error', "Нужно загрузить изображение");
+            return false;
+        }
+        return true;
     }
 }

@@ -56,19 +56,16 @@ $this->params['breadcrumbs'][] = $this->title;
                 'tableOptions' => ['class' => 'table kt-datatable__table'],
                 'columns' => [
                     ['class' => 'yii\grid\SerialColumn'],
-                    'name_uz',
-                    'name_en',
-                    'name_ru',
-//                    'gps:url',
+                    'fullName:html',
                     [
                         'attribute' => 'region_id',
                         'label' => 'Область',
-                        'filter' => Region::find()->select(['name_en', 'id'])->indexBy('id')->column(),
+                        'filter' => Region::find()->select(['name_ru', 'id'])->indexBy('id')->column(),
                         'filterInputOptions' => [
                             'class' => 'form-control',
                             'prompt' => 'Все'
                         ],
-                        'value' => 'region.name_en'
+                        'value' => 'region.name_ru'
                     ],
                     [
                         'attribute' => 'rating',
@@ -85,7 +82,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         'filter' =>  Html::activeDropDownList(
                             $searchModel,
                             'rating',
-                            array(1=>"1+",2=>"2+",3=>"3+",4=>"4+",5=>"5+"),
+                            array(1=>"1 +",2=>"2+",3=>"3+",4=>"4+",5=>"5+"),
                             ['class'=>'form-control','prompt' => 'Все']
                         ),
                     ],
@@ -103,35 +100,29 @@ $this->params['breadcrumbs'][] = $this->title;
                             $data_calatalog = OrganizationCatalog::find()->with('catalog')->where(['organization_id' => $model->id])->all();
                             $hh = '';
                             foreach ($data_calatalog as $item) {
-                                $hh .= $item->catalog->name_en.'<br>';
+                                $hh .= '-'.$item->catalog->name_ru.'<br>';
                             }
                             return $hh;
                         }
                     ],
-                    [
-                        'attribute' => 'Фото',
-                        'headerOptions' => ['style' => 'color:#5867dd'],
-                        'format' => 'raw',
-                        'value' => function ($model) {
-                            if (file_exists('uploads/'.$model->photo)){
-                                return Html::img(Yii::$app->homeUrl. 'uploads/'.$model->photo, ['style'=>'width:100px']);
-                            } else {
-                                return Html::img(Yii::$app->homeUrl. 'uploads/nophoto.png', ['style'=>'width:100px']);
-                            }
-                        },
-                    ],
+//                    [
+//                        'attribute' => 'Фото',
+//                        'headerOptions' => ['style' => 'color:#5867dd'],
+//                        'format' => 'raw',
+//                        'value' => function ($model) {
+//                            if (file_exists('uploads/'.$model->photo)){
+//                                return Html::img(Yii::$app->homeUrl. 'uploads/'.$model->photo, ['style'=>'width:100px']);
+//                            } else {
+//                                return Html::img(Yii::$app->homeUrl. 'uploads/nophoto.png', ['style'=>'width:100px']);
+//                            }
+//                        },
+//                    ],
                     [
                         'class' => 'yii\grid\ActionColumn',
                         'header' => 'Действия',
                         'headerOptions' => ['style' => 'color:#5867dd'],
-                        'template' => '{view}{update}{delete}',
+                        'template' => '{update}{delete}',
                         'buttons' => [
-                            'view' => function ($url, $model) {
-                                return Html::a('<span class="la la-lg la-cog"> </span>', $url, [
-                                    'title' => Yii::t('app', 'view'),
-                                ]);
-                            },
-
                             'update' => function ($url, $model) {
                                 return Html::a('<span class="la la-lg la-edit"> </span>', $url, [
                                     'title' => Yii::t('app', 'update'),

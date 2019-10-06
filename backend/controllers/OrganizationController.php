@@ -72,12 +72,16 @@ class OrganizationController extends Controller
         $model = new OrganizationWithCatalog();
         if ($model->load(Yii::$app->request->post())){
             $model->user_id = Yii::$app->user->id;
-            $model->image = $image = UploadedFile::getInstance($model, 'image');
-            $model->photo = Yii::$app->security->generateRandomString(12).'.'.$image->extension;
-            Yii::$app->params['uploadPath'] = Yii::$app->basePath . '/web/uploads/';
-            $path = Yii::$app->params['uploadPath'] . $model->photo;
+            $image = UploadedFile::getInstance($model, 'image');
+            if ($image != null){
+                $model->photo = Yii::$app->security->generateRandomString(12).'.'.$image->extension;
+                Yii::$app->params['uploadPath'] = Yii::$app->basePath . '/web/uploads/';
+                $path = Yii::$app->params['uploadPath'] . $model->photo;
+            }
             if ($model->validate() && $model->save()){
-                $image->saveAs($path);
+                if ($image != null){
+                    $image->saveAs($path);
+                }
                 $model->saveCatalogs();
                 return $this->redirect(['index']);
             }
@@ -102,12 +106,16 @@ class OrganizationController extends Controller
         $model->loadCatalogs();
 
         if ($model->load(Yii::$app->request->post())) {
-            $model->image = $image = UploadedFile::getInstance($model, 'image');
-            $model->photo = Yii::$app->security->generateRandomString(12).'.'.$image->extension;
-            Yii::$app->params['uploadPath'] = Yii::$app->basePath . '/web/uploads/';
-            $path = Yii::$app->params['uploadPath'] . $model->photo;
+            $image = UploadedFile::getInstance($model, 'image');
+            if ($image != null){
+                $model->photo = Yii::$app->security->generateRandomString(12).'.'.$image->extension;
+                Yii::$app->params['uploadPath'] = Yii::$app->basePath . '/web/uploads/';
+                $path = Yii::$app->params['uploadPath'] . $model->photo;
+            }
             if ($model->validate() && $model->save()){
-                $image->saveAs($path);
+                if ($image != null){
+                    $image->saveAs($path);
+                }
                 $model->saveCatalogs();
                 return $this->redirect(['index']);
             }
@@ -150,12 +158,14 @@ class OrganizationController extends Controller
     }
 
     function catalogFilter(){
+        $i=0;
         foreach (Catalog::find()->all() as $catalog) {
             $data = '';
+            $i++;
             foreach ($catalog->organizationCatalogs as $a) {
-                $data .= $a->organization_id. ', ';
+                $data .= $a->organization_id. ',';
             }
-            $catalog_name[$data] = $catalog->name_en;
+            $catalog_name[$i.'|'.$data] = $catalog->name_ru;
         }
         return $catalog_name;
     }

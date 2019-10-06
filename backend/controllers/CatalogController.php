@@ -8,6 +8,7 @@ use common\models\search\CatalogQuery;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\web\UploadedFile;
 
 /**
  * CatalogController implements the CRUD actions for Catalog model.
@@ -61,13 +62,24 @@ class CatalogController extends Controller
      * Creates a new Catalog model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
+     * @throws \yii\base\Exception
      */
     public function actionCreate()
     {
         $model = new Catalog();
-
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        if ($model->load(Yii::$app->request->post())) {
+            $image = UploadedFile::getInstance($model, 'image');
+            if ($image != null){
+                $model->icon = Yii::$app->security->generateRandomString(12).'.'.$image->extension;
+                Yii::$app->params['uploadPath'] = Yii::$app->basePath . '/web/uploads/';
+                $path = Yii::$app->params['uploadPath'] . $model->icon;
+            }
+            if ($model->validate() && $model->save()){
+                if ($image != null){
+                    $image->saveAs($path);
+                }
+                return $this->redirect(['view', 'id' => $model->id]);
+            }
         }
 
         return $this->render('create', [
@@ -81,15 +93,26 @@ class CatalogController extends Controller
      * @param integer $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
+     * @throws \yii\base\Exception
      */
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        $image = UploadedFile::getInstance($model, 'image');
+        if ($model->load(Yii::$app->request->post())) {
+            if ($image != null) {
+                $model->icon = Yii::$app->security->generateRandomString(12) . '.' . $image->extension;
+                Yii::$app->params['uploadPath'] = Yii::$app->basePath . '/web/uploads/';
+                $path = Yii::$app->params['uploadPath'] . $model->icon;
+            }
+            if ($model->validate() && $model->save()) {
+                if ($image != null) {
+                    $image->saveAs($path);
+                }
+                return $this->redirect(['index']);
+            }
         }
-
         return $this->render('update', [
             'model' => $model,
         ]);

@@ -12,9 +12,8 @@ class m190911_060626_catalog extends Migration
         $this->createTable('catalog', [
             'id' => $this->primaryKey(),
             'parent_id' => $this->integer()->defaultValue(null)->null(),
-            'rating' => $this->integer()->notNull(),
             'icon' => $this->string()->notNull(),
-            'name_uz' => $this->string()->notNull(),
+            'name_tj' => $this->string()->notNull(),
             'name_en' => $this->string()->notNull(),
             'name_ru' => $this->string()->notNull(),
         ]);

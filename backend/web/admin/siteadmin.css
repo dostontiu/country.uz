@@ -4,3 +4,9 @@
 .select2-selection.select2-selection--single{
     height: 40px; !important;
 }
+/*// Addon and addon wrapper for buttons*/
+.input-group-btn {
+   width: 50%;
+   white-space: nowrap;
+   vertical-align: middle; // Match the inputs
+}

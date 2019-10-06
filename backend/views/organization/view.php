@@ -9,7 +9,7 @@ use yii2mod\rating\StarRating;
 /* @var $this yii\web\View */
 /* @var $model common\models\Organization */
 
-$this->title = 'Организацию : '.$model->name_en;
+$this->title = 'Организацию : '.$model->name_ru;
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Organizations'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
@@ -55,7 +55,7 @@ function rate($id){
                     [
                         'attribute' => 'region_id',
                         'label' => 'Region',
-                        'value' => $model->region->name_en,
+                        'value' => $model->region->name_ru,
                     ],
                     [
                         'attribute' => 'rating',
@@ -63,10 +63,10 @@ function rate($id){
                         'format' => 'raw'
                     ],
                     'gps:url',
-                    'name_uz',
+                    'name_tj',
                     'name_en',
                     'name_ru',
-                    'description_uz:html',
+                    'description_tj:html',
                     'description_en:html',
                     'description_ru:html',
                     [

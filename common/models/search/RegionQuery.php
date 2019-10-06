@@ -11,6 +11,7 @@ use common\models\Region;
  */
 class RegionQuery extends Region
 {
+    public $fullName;
     /**
      * {@inheritdoc}
      */
@@ -18,7 +19,7 @@ class RegionQuery extends Region
     {
         return [
             [['id'], 'integer'],
-            [['name_uz', 'name_en', 'name_ru'], 'safe'],
+            [['name_tj', 'name_en', 'name_ru', 'fullName'], 'safe'],
         ];
     }
 
@@ -48,6 +49,20 @@ class RegionQuery extends Region
             'query' => $query,
         ]);
 
+        $dataProvider->setSort([
+            'attributes' => [
+                'id',
+                'fullName' => [
+                    'asc' => ['name_tj' => SORT_ASC, 'name_en' => SORT_ASC, 'name_ru' => SORT_ASC],
+                    'desc' => ['name_tj' => SORT_DESC, 'name_en' => SORT_DESC, 'name_ru' => SORT_DESC],
+                    'label' => 'Full Name',
+                    'default' => SORT_ASC
+                ],
+                'region_id',
+                'rating',
+            ]
+        ]);
+
         $this->load($params);
 
         if (!$this->validate()) {
@@ -61,7 +76,13 @@ class RegionQuery extends Region
             'id' => $this->id,
         ]);
 
-        $query->andFilterWhere(['like', 'name_uz', $this->name_uz])
+        $query->andWhere(
+            'name_tj LIKE "%' . $this->fullName  . '%" '
+            .'OR name_en LIKE "%' . $this->fullName . '%"'
+            .'OR name_ru LIKE "%' . $this->fullName . '%"'
+        );
+
+        $query->andFilterWhere(['like', 'name_tj', $this->name_tj])
             ->andFilterWhere(['like', 'name_en', $this->name_en])
             ->andFilterWhere(['like', 'name_ru', $this->name_ru]);
 

@@ -20,14 +20,10 @@
         "yiisoft/yii2-swiftmailer": "~2.0.0 || ~2.1.0",
         "creocoder/yii2-nested-sets": "^0.9.0",
         "kartik-v/yii2-widget-select2": "*",
-        "2amigos/yii2-ckeditor-widget" : "~2.1",
         "yii2mod/yii2-star-rating": "*",
-        "dmstr/yii2-adminlte-asset": "2.*",
         "kartik-v/yii2-widget-fileinput": "*",
-        "mirocow/yii2-yandex-maps" : "*",
         "msvdev/yii2-widget-mappicker": "*",
         "mdmsoft/yii2-admin": "2.x-dev"
-
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.1.0",

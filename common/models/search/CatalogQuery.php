@@ -11,14 +11,15 @@ use common\models\Catalog;
  */
 class CatalogQuery extends Catalog
 {
+    public $fullName;
     /**
      * {@inheritdoc}
      */
     public function rules()
     {
         return [
-            [['id', 'parent_id', 'rating'], 'integer'],
-            [['icon', 'name_uz', 'name_en', 'name_ru'], 'safe'],
+            [['id', 'parent_id'], 'integer'],
+            [['icon', 'name_tj', 'name_en', 'name_ru', 'fullName'], 'safe'],
         ];
     }
 
@@ -48,6 +49,20 @@ class CatalogQuery extends Catalog
             'query' => $query,
         ]);
 
+        $dataProvider->setSort([
+            'attributes' => [
+                'id',
+                'fullName' => [
+                    'asc' => ['name_tj' => SORT_ASC, 'name_en' => SORT_ASC, 'name_ru' => SORT_ASC],
+                    'desc' => ['name_tj' => SORT_DESC, 'name_en' => SORT_DESC, 'name_ru' => SORT_DESC],
+                    'label' => 'Full Name',
+                    'default' => SORT_ASC
+                ],
+                'region_id',
+                'rating',
+            ]
+        ]);
+
         $this->load($params);
 
         if (!$this->validate()) {
@@ -60,11 +75,16 @@ class CatalogQuery extends Catalog
         $query->andFilterWhere([
             'id' => $this->id,
             'parent_id' => $this->parent_id,
-            'rating' => $this->rating,
         ]);
 
+        $query->andWhere(
+            'name_tj LIKE "%' . $this->fullName  . '%" '
+            .'OR name_en LIKE "%' . $this->fullName . '%"'
+            .'OR name_ru LIKE "%' . $this->fullName . '%"'
+        );
+
         $query->andFilterWhere(['like', 'icon', $this->icon])
-            ->andFilterWhere(['like', 'name_uz', $this->name_uz])
+            ->andFilterWhere(['like', 'name_tj', $this->name_tj])
             ->andFilterWhere(['like', 'name_en', $this->name_en])
             ->andFilterWhere(['like', 'name_ru', $this->name_ru]);
 

@@ -2,13 +2,13 @@
 
 namespace common\models;
 
-use Yii;
+use yii\helpers\Html;
 
 /**
  * This is the model class for table "{{%region}}".
  *
  * @property int $id
- * @property string $name_uz
+ * @property string $name_tj
  * @property string $name_en
  * @property string $name_ru
  *
@@ -30,8 +30,8 @@ class Region extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['name_uz', 'name_en', 'name_ru'], 'required'],
-            [['name_uz', 'name_en', 'name_ru'], 'string', 'max' => 255],
+            [['name_tj', 'name_en', 'name_ru'], 'required'],
+            [['name_tj', 'name_en', 'name_ru'], 'string', 'max' => 255],
         ];
     }
 
@@ -42,9 +42,10 @@ class Region extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'name_uz' => 'Название (UZ)',
+            'name_tj' => 'Название (TJ)',
             'name_en' => 'Название (EN)',
             'name_ru' => 'Название (RU)',
+            'fullName' => 'Название',
         ];
     }
 
@@ -54,6 +55,11 @@ class Region extends \yii\db\ActiveRecord
     public function getOrganizations()
     {
         return $this->hasMany(Organization::className(), ['region_id' => 'id']);
+    }
+
+    /* Getter for all name */
+    public function getFullName() {
+        return Html::a(($this->name_ru)?$this->name_ru:'На другом языке','view?id='.$this->id);
     }
 
     public function extraFields()
