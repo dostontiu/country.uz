@@ -66,11 +66,11 @@ class Organization extends \yii\db\ActiveRecord
             'rating' => 'Рейтинг',
             'photo' => 'Фото',
             'gps' => 'Геолокация',
-            'name_tj' => 'Название (TJ)',
+            'name_tj' => 'Название (ТЖ)',
             'name_en' => 'Название (EN)',
-            'name_ru' => 'Название (RU)',
+            'name_ru' => 'Название (РУ)',
             'fullName' => 'Название',
-            'description_tj' => 'Описание (TJ)',
+            'description_tj' => 'Описание (ТЖ)',
             'description_en' => 'Описание (EN)',
             'description_ru' => 'Описание (РУ)',
             'catalog' => 'Каталог',
@@ -87,7 +87,7 @@ class Organization extends \yii\db\ActiveRecord
 
     /* Getter for all name */
     public function getFullName() {
-        return Html::a(($this->name_ru)?$this->name_ru:'На другом языке','view?id='.$this->id);
+        return Html::a(($this->name_ru)?$this->name_ru:'На другом языке',['view', 'id' => $this->id]);
     }
 
     /**

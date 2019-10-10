@@ -88,7 +88,7 @@ class OrganizationController extends Controller
         }
         return $this->render('create', [
             'model' => $model,
-            'catalogs' => Catalog::getAvailableCatalogs(),
+            'catalogs' => $model->getAvailableCatalogs(),
         ]);
     }
 
@@ -123,7 +123,7 @@ class OrganizationController extends Controller
 
         return $this->render('update', [
             'model' => $model,
-            'catalogs' => Catalog::getAvailableCatalogs(),
+            'catalogs' => $model->getAvailableCatalogs(),
         ]);
     }
 

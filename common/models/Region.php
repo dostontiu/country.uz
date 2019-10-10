@@ -42,9 +42,9 @@ class Region extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'name_tj' => 'Название (TJ)',
+            'name_tj' => 'Название (ТЖ)',
             'name_en' => 'Название (EN)',
-            'name_ru' => 'Название (RU)',
+            'name_ru' => 'Название (РУ)',
             'fullName' => 'Название',
         ];
     }
@@ -59,7 +59,7 @@ class Region extends \yii\db\ActiveRecord
 
     /* Getter for all name */
     public function getFullName() {
-        return Html::a(($this->name_ru)?$this->name_ru:'На другом языке','view?id='.$this->id);
+        return Html::a(($this->name_ru)?$this->name_ru:'На другом языке',['view', 'id' => $this->id]);
     }
 
     public function extraFields()

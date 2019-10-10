@@ -57,9 +57,9 @@ class Catalog extends \yii\db\ActiveRecord
             'id' => 'ID',
             'parent_id' => 'ID родителя',
             'icon' => 'Икона',
-            'name_tj' => 'Название (TJ)',
+            'name_tj' => 'Название (ТЖ)',
             'name_en' => 'Название (EN)',
-            'name_ru' => 'Название (RU)',
+            'name_ru' => 'Название (РУ)',
             'fullName' => 'Название',
         ];
     }
@@ -88,20 +88,9 @@ class Catalog extends \yii\db\ActiveRecord
         return $this->hasMany(OrganizationCatalog::className(), ['catalog_id' => 'id']);
     }
 
-    /**
-     * Get all the available categories (*4)
-     * @return array available categories
-     */
-    public static function getAvailableCatalogs()
-    {
-        $catalogs = self::find()->orderBy('name_tj')->asArray()->all();
-        $items = ArrayHelper::map($catalogs, 'id', 'name_tj');
-        return $items;
-    }
-
     /* Getter for all name */
     public function getFullName() {
-        return Html::a(($this->name_ru)?$this->name_ru:'На другом языке','view?id='.$this->id);
+        return Html::a(($this->name_ru)?$this->name_ru:'На другом языке',['view', 'id' => $this->id]);
     }
 
     public function extraFields()

@@ -72,4 +72,14 @@ class OrganizationWithCatalog extends Organization
         }
         /* Be careful, $this->catalog_ids can be empty */
     }
+
+    /**
+     * Get all the available categories (*4)
+     * @return array available categories
+     */
+    public static function getAvailableCatalogs()
+    {
+        $catalogs = Catalog::find()->orderBy('name_ru')->asArray()->all() ?? [];
+        return ArrayHelper::map($catalogs, 'id', 'name_ru');
+    }
 }

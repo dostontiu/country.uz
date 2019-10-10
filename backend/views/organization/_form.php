@@ -2,6 +2,7 @@
 
 use common\models\Region;
 use kartik\file\FileInput;
+use kartik\select2\Select2;
 use msvdev\widgets\mappicker\MapInput;
 use yii\bootstrap\Tabs;
 use yii\helpers\ArrayHelper;
@@ -12,6 +13,7 @@ use yii2mod\rating\StarRating;
 /* @var $this yii\web\View */
 /* @var $model common\models\Organization */
 /* @var $form yii\widgets\ActiveForm */
+/* @var $catalogs \common\models\Catalog  */
 ?>
 
 <div class="organization-form">
@@ -80,9 +82,18 @@ use yii2mod\rating\StarRating;
                             'hints' => ['Плохо', 'бедных', 'регулярный', 'хороший', 'великолепный'],
                         ],
                     ]); ?>
-                    <?= /** @var \common\models\Catalog $catalogs */
+                    <?=
                     $form->field($model, 'catalog_ids')
-                ->listBox((array)$catalogs, ['multiple' => true, 'size'=>5])->label('Каталоги')
+                        ->widget(Select2::classname(), [
+                            'data' => $catalogs,
+                            'options' => ['placeholder' => 'Выберите каталоги ...', 'multiple' => true],
+                            'pluginOptions' => [
+                                'tags' => true,
+                                'tokenSeparators' => [',', ' '],
+//                        'maximumInputLength' => 10
+                            ],
+                        ])->label('Каталоги');
+//                ->listBox((array)$catalogs, ['multiple' => true, 'size'=>5])->label('Каталоги')
                         /* or, you may use a checkbox list instead */
         //                ->checkboxList($catalogs)
         //                ->hint('Select the catalogs');
