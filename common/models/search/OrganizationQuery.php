@@ -43,7 +43,7 @@ class OrganizationQuery extends Organization
      */
     public function search($params)
     {
-        $query = Organization::find()->with('region');
+        $query = Organization::find()->with('region')->orderBy(['id' => SORT_DESC]);
 
         // add conditions that should always apply here
 
@@ -71,15 +71,18 @@ class OrganizationQuery extends Organization
             // $query->where('0=1');
             return $dataProvider;
         }
-            $catalg = explode('|',$this->catalog)[0];
-        if (!empty($catalg)){
-            $catalog_filter = ['in', 'id',explode(',', $catalg)];
-        } else {
-            $catalog_filter = ['id' => 0];
-        }
+
         if (empty($this->catalog)){
             $catalog_filter = [];
+        } else {
+            $catalg = explode('|',$this->catalog)[1];
+            if (!empty($catalg)){
+                $catalog_filter = ['in', 'id',explode(',', $catalg)];
+            } else {
+                $catalog_filter = ['id' => 0];
+            }
         }
+
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,

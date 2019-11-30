@@ -12,7 +12,7 @@ use yii2mod\rating\StarRating;
 /* @var $catalogFilter backend\controllers\OrganizationController */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = Yii::t('app', 'Организации');
+$this->title = Yii::t('app', 'Организация');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="organization-index">
