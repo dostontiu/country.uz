@@ -71,7 +71,7 @@ class OrganizationQuery extends Organization
             // $query->where('0=1');
             return $dataProvider;
         }
-            $catalg = explode('|',$this->catalog)[1];
+            $catalg = explode('|',$this->catalog)[0];
         if (!empty($catalg)){
             $catalog_filter = ['in', 'id',explode(',', $catalg)];
         } else {

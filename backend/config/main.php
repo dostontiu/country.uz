@@ -1,8 +1,4 @@
 <?php
-
-use app\modules\api\controllers\OrganizationController;
-use yii\rest\UrlRule;
-
 $params = array_merge(
     require __DIR__ . '/../../common/config/params.php',
     require __DIR__ . '/../../common/config/params-local.php',
@@ -29,14 +25,10 @@ return [
                 ],
             ],
         ],
-        'api' => [
-            'class' => 'app\modules\api\Module',
-            'layout' => false,
-        ],
     ],
     'components' => [
         'request' => [
-            'baseUrl' => '/admin',
+//            'baseUrl' => '',
             'csrfParam' => '_csrf-backend',
             'parsers' => [
                 'application/json' => 'yii\web\JsonParser',

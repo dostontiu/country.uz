@@ -45,7 +45,8 @@ class Organization extends \yii\db\ActiveRecord
         return [
             [['user_id', 'rating', 'gps'], 'required'],
             [['user_id', 'region_id'], 'integer'],
-            [['rating', 'photo', 'gps', 'name_tj', 'name_en', 'name_ru', 'description_tj', 'description_en', 'description_ru'], 'string', 'max' => 255],
+            [['rating', 'photo', 'gps', 'name_tj', 'name_en', 'name_ru'], 'string', 'max' => 255],
+            [['description_tj', 'description_en', 'description_ru'], 'string'],
             [['region_id'], 'exist', 'skipOnError' => true, 'targetClass' => Region::className(), 'targetAttribute' => ['region_id' => 'id']],
             [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['user_id' => 'id']],
             [['image'], 'safe'],
