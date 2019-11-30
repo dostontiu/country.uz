@@ -50,9 +50,4 @@ return [
 
     ],
     'params' => $params,
-//    'modules' => [
-//        'apidel' => [
-//            'class' => 'app\modules\apidel\Module',
-//        ],
-//    ],
 ];

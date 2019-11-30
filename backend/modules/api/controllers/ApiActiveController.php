@@ -14,14 +14,4 @@ class ApiActiveController extends ActiveController
         unset($actions['delete']);
         return $actions;
     }
-
-    /*public function behaviors()
-    {
-        $behaviors = parent::behaviors();
-        // enabled HttpBearerAuth
-        $behaviors['authenticator'] = [
-            'class' => HttpBearerAuth::className(),
-            ];
-        return $behaviors;
-    }*/
 }

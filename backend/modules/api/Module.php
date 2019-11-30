@@ -5,7 +5,7 @@ namespace app\modules\api;
 use Yii;
 
 /**
- * apidel module definition class
+ * api module definition class
  */
 class Module extends \yii\base\Module
 {
@@ -20,7 +20,8 @@ class Module extends \yii\base\Module
     public function init()
     {
         parent::init();
-        Yii::$app->user->enableSession = false;
+
         // custom initialization code goes here
+        Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
     }
 }

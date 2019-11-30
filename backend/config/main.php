@@ -1,4 +1,5 @@
 <?php
+
 $params = array_merge(
     require __DIR__ . '/../../common/config/params.php',
     require __DIR__ . '/../../common/config/params-local.php',
@@ -19,11 +20,14 @@ return [
             'controllerMap' => [
                 'assignment' => [
                     'class' => 'mdm\admin\controllers\AssignmentController',
-                    /* 'userClassName' => 'app\models\User', */
+                    'userClassName' => 'common\models\User',
                     'idField' => 'id',
                     'usernameField' => 'username',
                 ],
             ],
+        ],
+        'api' => [
+            'class' => 'app\modules\api\Module',
         ],
     ],
     'components' => [
@@ -59,11 +63,10 @@ return [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
-//                'api' => 'admin/api',
+                ['class' => 'yii\rest\UrlRule', 'controller' => ['api/organization', 'api/region', 'api/catalog']],
                 'logout' => 'site/logout',
                 'login' => 'site/login',
                 '<controller:\w+>/<action:\w+>/' => '<controller>/<action>',
-//                ['class' => UrlRule::className(), 'controller' => 'organizational'],
             ],
         ],
         'authManager' => [
@@ -74,10 +77,9 @@ return [
     'as access' => [
         'class' => 'mdm\admin\components\AccessControl',
         'allowActions' => [
-            'site/logout',
+            'site/*',
             'api/*',
-//            'rbac/*',
-//            'organization/*'
+//            '*' // for everything
         ]
     ],
     'params' => $params,
