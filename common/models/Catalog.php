@@ -85,7 +85,7 @@ class Catalog extends \yii\db\ActiveRecord
      */
     public function getOrganizationCatalogs()
     {
-        return $this->hasMany(OrganizationCatalog::className(), ['catalog_id' => 'id']);
+        return $this->hasMany(OrganizationCatalog::className(), ['catalog_id' => 'id'])->with('organization');
     }
 
     /* Getter for all name */
@@ -95,7 +95,9 @@ class Catalog extends \yii\db\ActiveRecord
 
     public function extraFields()
     {
-        return ['parent', 'catalogs', 'organizationCatalogs'];
+        return ['parent', 'catalogs', 'organizations' => function($model){
+            return $model->getOrganizations($model->id);
+        }];
     }
 
     public function beforeSave($insert)
@@ -108,5 +110,26 @@ class Catalog extends \yii\db\ActiveRecord
             return false;
         }
         return true;
+    }
+
+    public function fields()
+    {
+        return [
+            'id',
+            'name_tj',
+            'name_en',
+            'name_ru',
+//            'organizations' => 'organizationCatalogs'
+        ];
+    }
+
+    public function getOrganizations($cat_id)
+    {
+        $query = (new \yii\db\Query())
+            ->select('id, rating, photo, name_tj, name_en, name_ru, description_tj, description_en, description_ru, gps')
+            ->where(['catalog_id' => $cat_id])
+            ->from('organization_catalog')
+            ->leftJoin( 'organization', '`organization_catalog`.`organization_id` = `organization`.`id`');
+        return $query->createCommand()->queryAll();
     }
 }

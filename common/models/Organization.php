@@ -4,6 +4,7 @@ namespace common\models;
 
 use Yii;
 use yii\helpers\Html;
+use yii\helpers\Url;
 
 /**
  * This is the model class for table "{{%organization}}".
@@ -109,7 +110,7 @@ class Organization extends \yii\db\ActiveRecord
 
     public function extraFields()
     {
-        return ['organizationCatalogs', 'region'];
+        return ['catalog' => 'organizationCatalogs', 'region'];
     }
 
     public function beforeSave($insert)
@@ -127,5 +128,36 @@ class Organization extends \yii\db\ActiveRecord
             Yii::$app->session->setFlash('error', "Пожалуйста, укажите хотя бы один язык");
             return false;
         }
+    }
+
+    public function fields()
+    {
+        $fields = parent::fields();
+        unset($fields['user_id'], $fields['region_id'], $fields['catalog_id'], $fields['gps']);
+        $fields['photo'] = function($model){
+            return Url::base(true).'/uploads/'.$model->photo;
+        };
+        $fields['latitude'] = function($model){
+            return isset(explode('@',$model->gps)[0]) ? explode('@',$model->gps)[0] : null;
+        };
+        $fields['longitude'] = function($model){
+            return isset(explode('@',$model->gps)[1]) ? explode('@',$model->gps)[1] : null;
+        };
+        $fields['catalogs'] = function ($model){
+            return $model->getCatalogs($model->id);
+        };
+        $fields['user'] ='user';
+        $fields['region'] ='region';
+        return $fields;
+    }
+
+    public function getCatalogs($org_id)
+    {
+        $query = (new \yii\db\Query())
+            ->select('id, catalog.name_tj, catalog.name_en, catalog.name_ru')
+            ->where(['organization_id' => $org_id])
+            ->from('organization_catalog')
+            ->leftJoin( 'catalog', '`organization_catalog`.`catalog_id` = `catalog`.`id`');
+        return $query->createCommand()->queryAll();
     }
 }
