@@ -79,7 +79,7 @@ class OrganizationWithCatalog extends Organization
      */
     public static function getAvailableCatalogs()
     {
-        $catalogs = Catalog::find()->orderBy('name_ru')->asArray()->all() ?? [];
+        $catalogs = ( Catalog::find()->orderBy('name_ru')->asArray()->all() ) ? Catalog::find()->orderBy('name_ru')->asArray()->all() : [];
         return ArrayHelper::map($catalogs, 'id', 'name_ru');
     }
 }

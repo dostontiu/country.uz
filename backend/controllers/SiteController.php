@@ -32,14 +32,22 @@ class SiteController extends Controller
                         'allow' => true,
                         'roles' => ['@'],
                     ],
+                    /*[
+                        'actions' => ['signup', 'login'],
+                        'allow' => true, // not allowed actions but not working
+                        'roles' => ['@'],
+                        'matchCallback' => function ($rule, $action) {
+                            return 'not allowed';
+                        },
+                    ],*/
                 ],
-                'verbs' => [
-                    'class' => VerbFilter::className(),
-                    'actions' => [
-                        'logout' => ['post'],
-                    ],
+            ],
+            'verbs' => [
+                'class' => VerbFilter::className(),
+                'actions' => [
+                    'logout' => ['post'],
                 ],
-            ]
+            ],
         ];
     }
 

@@ -64,7 +64,7 @@ return [
             'showScriptName' => false,
             'rules' => [
                 ['class' => 'yii\rest\UrlRule', 'controller' => ['api/organization', 'api/region', 'api/catalog']],
-                'logout' => 'site/logout',
+//                'logout' => 'site/logout',
                 'login' => 'site/login',
                 '<controller:\w+>/<action:\w+>/' => '<controller>/<action>',
             ],

@@ -80,13 +80,6 @@ $this->params['breadcrumbs'][] = $this->title;
                 <button id="kt_login_forgot_cancel" class="btn btn-secondary btn-pill kt-login__btn-secondary">Cancel</button>
             </div>
         </form>
-    </div>
-    <div class="kt-login__account">
-								<span class="kt-login__account-msg">
-									Don't have an account yet ?
-								</span>
-        &nbsp;&nbsp;
-        <a href="<?= Yii::$app->homeUrl?>../signup" id="kt_login_signup" class="kt-login__account-link">Sign Up!</a>
-    </div>
+        </div>
 </div>
 
